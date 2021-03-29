@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+let registration = require('../controllers/registration');
+
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('registration', {title: 'Registration'});
-});
+router.get('/', registration.getRegistration);
 
 module.exports = router;
