@@ -1,15 +1,11 @@
-doctype html
-head
-    meta(charset='UTF-8')
-    link(rel='stylesheet' href='/stylesheets/style.css')
-    link(href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet')
-    meta(name='viewport' content='width=device-width, initial-scale=1')
-    title Sign in
-.main
-    p.sign(align='center') Sign in
-    form.form1
-        input.un(type='text' align='center' placeholder='Username')
-        input.pass(type='password' align='center' placeholder='Password')
-        a.btn(align='center') Sign in
-        p.register(align='center')
-            a(href='#') Register
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    form(action="/login/credentials", method="POST")
+        input(type="email", placeholder="Enter your email address")
+        input(type="text", placeholder="Enter your username")
+        input(type="password", placeholder="Enter your password")
+        button(type="submit") Submit
+        button(type="submit") Registration
