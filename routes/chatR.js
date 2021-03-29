@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-let registration = require('../controllers/registration');
+let chatC = require('../controllers/chatC');
 
 /* GET home page. */
-router.get('/', registration.getRegistration);
+router.get('/chat', chatC.getChat);
 
 module.exports = router;
