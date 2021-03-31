@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-let loginC = require('../controllers/loginC');
+let controller = require('../controllers/loginC');
 
-/* GET home page. */
-router.get('/login', loginC.getLogin);
+router.get("/", controller.getLogin);
+router.post("/verification", controller.verification)
 
 module.exports = router;

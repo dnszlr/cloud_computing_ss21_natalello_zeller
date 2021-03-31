@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-let registrationC = require('../controllers/registrationC');
+let controller = require('../controllers/registrationC');
 
-/* GET home page. */
-router.get('/registration', registrationC.getRegistration);
-router.get('/registration/credentials', registrationC.submitCredentails);
+router.get('/', controller.getRegistration);
+router.post('/', controller.register);
 
 module.exports = router;

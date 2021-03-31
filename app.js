@@ -1,14 +1,24 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+// Mongoose
+const mongoose = require('mongoose');
+// Routes
+const loginRouter = require('./routes/loginR');
+const loginController = require('./controllers/loginC');
+const registrationRouter = require('./routes/registrationR');
+const chatRouter = require('./routes/chatR');
 
-var loginRouter = require('./routes/loginR');
-var registrationRouter = require('./routes/registrationR');
-var chatRouter = require('./routes/chatR');
+// express app
+const app = express();
 
-var app = express();
+// Database connect
+const dbUri = "mongodb+srv://shaed:cc21gndz@shaeddb.v7gys.mongodb.net/ccShaed?retryWrites=true&w=majority";
+mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((result) => console.log('connected to ccShaedDB'))
+    .catch((err) => console.log(err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/', loginRouter);
+// Route usage
 app.use('/login', loginRouter);
 app.use('/registration', registrationRouter);
 app.use('/chat', chatRouter);

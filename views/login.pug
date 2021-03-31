@@ -3,9 +3,8 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
-    form(action="/login/credentials", method="POST")
-        input(type="email", placeholder="Enter your email address")
-        input(type="text", placeholder="Enter your username")
-        input(type="password", placeholder="Enter your password")
-        button(type="submit") Submit
-        button(type="submit") Registration
+    form(action="/login/verification", method="POST")
+        input(name="username", type="text", placeholder="Enter your username")
+        input(name="password", type="password", placeholder="Enter your password")
+        button(type="submit") Login
+    a(class='button', href='/registration') Have no Account?
