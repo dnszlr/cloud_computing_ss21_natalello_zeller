@@ -2,11 +2,13 @@ extends layout
 
 block content
     h1= title
-    p Welcome to #{title}
-    form(action="/registration", method="POST")
-        input(name = "email", type="email", placeholder="Enter your email address")
-        input(name = "username", type="text", placeholder="Enter your username")
-        input(name = "password", type="password", placeholder="Enter your password")
-        input(name = "superpower", type="text", placeholder="Enter your superpower")
-        button(type="submit") Register
-    a(class='button', href='/login') Have a Account?
+
+    div.main
+        p.sign Welcome to #{title}
+        form.form1(action="/registration", method="POST")
+            input.inputfield(name = "email", type="email", placeholder="Enter your email address")
+            input.inputfield(name = "username", type="text", placeholder="Enter your username")
+            input.inputfield(name = "password", type="password", placeholder="Enter your password")
+            input.inputfield(name = "superpower", type="text", placeholder="Enter your superpower")
+            button.btn(type="submit") Register
+        a.sign(class='button', href='/login') Have a Account?

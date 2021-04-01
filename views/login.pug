@@ -2,9 +2,10 @@ extends layout
 
 block content
     h1= title
-    p Welcome to #{title}
-    form(action="/login/verification", method="POST")
-        input(name="username", type="text", placeholder="Enter your username")
-        input(name="password", type="password", placeholder="Enter your password")
-        button(type="submit") Login
-    a(class='button', href='/registration') Have no Account?
+    div.main
+        p.sign Welcome to #{title}
+        form.form1(action="/login/verification", method="POST")
+            input.inputfield(name="username", type="text", placeholder="Enter your username")
+            input.inputfield(name="password", type="password", placeholder="Enter your password")
+            button.btn(type="submit") Login
+        a.sign(class='button', href='/registration') Have no Account?
