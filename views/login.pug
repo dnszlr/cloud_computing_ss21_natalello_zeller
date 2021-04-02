@@ -1,11 +1,13 @@
 extends layout
 
 block content
-    h1= title
+    //h1= title
     div.main
-        p.sign Welcome to #{title}
+        div.imgbox
+            img.imglogo(src='/pictures/logo_transparent.png' alt='logo')
+        //p.sign Welcome to #{title}
         form.form1(action="/login/verification", method="POST")
             input.inputfield(name="username", type="text", placeholder="Enter your username")
             input.inputfield(name="password", type="password", placeholder="Enter your password")
-            button.btn(type="submit") Login
-        a.sign(class='button', href='/registration') Have no Account?
+            button.btn2(type="submit") Login
+        a.register(class='button', href='/registration') Have no Account?

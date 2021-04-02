@@ -9,13 +9,13 @@ body {
   width: 400px;
   height: 500px;
   margin: 7em auto;
-  border-radius: 0em;
+  border-radius: 5px;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);
 }
 
 .inputfield {
   background-color: transparent;
-  color: #eeeeee;
+  color: black;
   outline: none;
   outline-style: none;
   border-top: none;
@@ -37,7 +37,7 @@ body {
 }
 
 .sign {
-  padding-top: 40px;
+  padding-top: 0px;
   color: #0000ff;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
@@ -47,12 +47,12 @@ body {
 
 
 form.form1 {
-  padding-top: 40px;
+  padding-top: 70px;
 }
 
 .btn {
   cursor: pointer;
-  border-radius: 0px;
+  border-radius: 5px;
   color: #fff;
   background:#0000ff;
   border: 0;
@@ -64,13 +64,33 @@ form.form1 {
   margin-left: 35%;
   font-size: 13px;
   box-shadow: 0px 0px 0px 0px black;
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+
+.btn2 {
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  background:#0000ff;
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 35%;
+  font-size: 13px;
+  box-shadow: 0px 0px 0px 0px black;
+  margin-top: 118px;
+  margin-bottom: 10px;
 }
 
 .register {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: #E1BEE7;
   padding-top: 20px;
-  margin-left: 36%;
+  margin-left: 34%;
 
 }
 
@@ -78,5 +98,16 @@ a {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: #E1BEE7;
   text-decoration: none
+}
+
+
+.imglogo{
+  height: 175px;
+  width: 175px;
+  margin-left: 26%;
+}
+.imgbox{
+  max-height: 100px;
+  max-width: 100%;
 }
 
