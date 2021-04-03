@@ -7,9 +7,16 @@ block content
         div.imgbox
             img.imglogo(src='/pictures/logo_transparent.png' alt='logo')
         form.form1(action="/registration", method="POST")
-            input.inputfield(name = "email", type="email", placeholder="Enter your email address")
-            input.inputfield(name = "username", type="text", placeholder="Enter your username")
-            input.inputfield(name = "password", type="password", placeholder="Enter your password")
+            div.inputwrapper
+                img.inputicon(src='/pictures/mail.png' alt='mail icon')
+                input.inputfield(name = "email", type="email", placeholder="Enter your email address", required='true',maxlength="255")
+            div.inputwrapper
+                img.inputicon(src='/pictures/user.png' alt='mail icon')
+                input.inputfield(name = "username", type="text", placeholder="Enter your username", required='true',maxlength="255")
+            div.inputwrapper
+                img.inputicon(src='/pictures/password.png' alt='mail icon')
+                input.inputfield(name = "password", type="password", placeholder="Enter your password", required='true',maxlength="255")
             //input.inputfield(name = "superpower", type="text", placeholder="Enter your superpower")
             button.btn(type="submit") Register
+            a(href='#')
             a.register(class='button', href='/login') Have an Account?
