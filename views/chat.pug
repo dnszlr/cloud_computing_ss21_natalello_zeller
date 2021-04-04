@@ -1,12 +1,17 @@
 extends layout
 
 block content
-    div.sideBar
-    ul.messages()
-        li Test
-        li Test2
+    div.wrapper()
+        div.first()
+            div.sideBar
 
-    form.formChat()
-        input.inputChat(name="massage", type="text", placeholder="Enter your username")
-        button.btnChat(type='submit') Send
+
+        div.second()
+        ul.messages()
+            li Test
+            li Test2
+            form.formChat()
+                input.inputChat(name="massage", type="text", placeholder="Enter your username")
+                button.btnChat(type='submit') Send
+
 
