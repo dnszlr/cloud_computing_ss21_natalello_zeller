@@ -1,7 +1,6 @@
 body {
     background-color: white;
-    font-family: 'Ubuntu', sans-serif;
-    height: 100%;
+    font-family: Segoe UI, sans-serif;
 }
 
 html {
@@ -13,27 +12,20 @@ html {
     background-color: #FFFFFF;
     width: 400px;
     height: 500px;
-    margin: 7em auto;
+    margin: 13em auto;
     border-radius: 5px;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);
     text-align: center;
 }
 
 .inputfield {
+    font-family: Segoe UI, sans-serif;
+    font-size: 20px;
     background-color: transparent;
     color: black;
     outline: none;
-    outline-style: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-    padding: 0px 0px;
-    margin-left: 0px;
+    border: none;
     text-align: center;
-    /*margin-bottom: 27px;*/
-    font-family: 'Ubuntu', sans-serif;
-    width: 85%;
     height: 42px;
 }
 
@@ -61,11 +53,11 @@ html {
 }
 
 .alignInput {
-    height: 150px;
+    height: 185px;
 }
 
-.alignWrapper{
-    margin-top: 60px;
+.alignWrapper {
+    margin-top: 15px;
 }
 
 .btnWrapper {
@@ -75,14 +67,13 @@ html {
 .inputicon {
     width: 30px;
     height: 30px;
-    margin-top: 5px;
+    margin-top: 8px;
     float: left;
 }
 
 .sign {
     padding-top: 0px;
     color: #0000ff;
-    font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 23px;
     text-align: center;
@@ -97,13 +88,15 @@ form.form1 {
     cursor: pointer;
     border-radius: 5px;
     color: black;
-    background: #eeeeee;
+    background: #ff149385;
     border: solid 1px deeppink;
     /* top right bottom left */
     padding: 10px 40px 10px 40px;
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 13px;
     box-shadow: 0px 0px 0px 0px black;
+    font-family: Segoe UI, sans-serif;
+    font-size: 15px;
+    width: 136px;
+    margin-top: 10px;
 }
 
 .btnAuth:hover {
@@ -114,6 +107,7 @@ form.form1 {
 .register {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
     color: #ff99cf;
+    font-size: 17px;
 }
 
 a {
@@ -134,9 +128,9 @@ a {
 }
 
 .errorField {
+    font-family: Segoe UI, sans-serif;
     color: #FF0000;
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 

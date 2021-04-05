@@ -7,18 +7,18 @@ block content
         div.alignInput
             div.inputwrapper
                     img.inputicon(src='/pictures/mail.png' alt='mail icon')
-                    input#email.inputfield(type="email", placeholder="Enter your email address", required='true',maxlength="255")
+                    input#email.inputfield(type="email", placeholder="Email address", required='true',maxlength="255")
             div.inputwrapper
                     img.inputicon(src='/pictures/user.png' alt='mail icon')
-                    input#username.inputfield(name = "username", type="text", placeholder="Enter your username", required='true',maxlength="255")
+                    input#username.inputfield(name = "username", type="text", placeholder="Username", required='true',maxlength="255")
             div.inputwrapper
                     img.inputicon(src='/pictures/password.png' alt='mail icon')
-                    input#password.inputfield(name = "password", type="password", placeholder="Enter your password", required='true',maxlength="255")
+                    input#password.inputfield(name = "password", type="password", placeholder="Password", required='true',maxlength="255")
         div.alignWrapper
             div.btnWrapper
-                button#btnRegister.btnAuth() Register
+                label#lError.errorField() &nbsp
             div.btnWrapper
-                label#lError.errorField()
+                button#btnRegister.btnAuth() Register
             div.btnWrapper
                 a.register(class='button', href='/login') Have an Account?
 
