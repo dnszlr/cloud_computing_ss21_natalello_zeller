@@ -1,289 +1,276 @@
 body {
-  background-color: white;
-  font-family: 'Ubuntu', sans-serif;
-  height: 100%;
+    background-color: white;
+    font-family: 'Ubuntu', sans-serif;
+    height: 100%;
 }
+
 html {
-  height: 100%;
+    height: 100%;
 }
 
 
 .main {
-  background-color: #FFFFFF;
-  width: 400px;
-  height: 500px;
-  margin: 7em auto;
-  border-radius: 5px;
-  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 500px;
+    margin: 7em auto;
+    border-radius: 5px;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.4);
+    text-align: center;
 }
 
 .inputfield {
-  background-color: transparent;
-  color: black;
-  outline: none;
-  outline-style: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
-  padding: 0px 0px;
-  margin-left: 0px;
-  text-align: center;
-  /*margin-bottom: 27px;*/
-  font-family: 'Ubuntu', sans-serif;
-  width: 85%;
-  height: 42px;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 0px 0px;
+    margin-left: 0px;
+    text-align: center;
+    /*margin-bottom: 27px;*/
+    font-family: 'Ubuntu', sans-serif;
+    width: 85%;
+    height: 42px;
 }
 
-
-.inputfield:hover{
-  border-color: deeppink;
+.inputfield:hover {
+    border-color: deeppink;
 }
 
-.inputwrapper{    position: revert;
-  position: revert;
-  max-width: 75%;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: solid #eeeeee 3px;
-  margin-left: 11%;
-  margin-top: 20px;
-  border-radius: 0px;
-}
-.inputwrapper:hover{
-  border-color: deeppink;
-}
-.inputwrapper:focus{
-  border-bottom-color: deeppink;
+.inputwrapper {
+    max-width: 75%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #eeeeee 3px;
+    margin-left: 11%;
+    margin-top: 20px;
+    border-radius: 0px;
 }
 
-.inputicon{
-  width: 30px;
-  height: 30px;
-  margin-left: 0px;
-  margin-top: 10px;
+.inputwrapper:hover {
+    border-color: deeppink;
+}
+
+.inputwrapper:focus {
+    border-bottom-color: deeppink;
+}
+
+.alignInput {
+    height: 150px;
+}
+
+.alignWrapper{
+    margin-top: 60px;
+}
+
+.btnWrapper {
+    display: block;
+}
+
+.inputicon {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    float: left;
 }
 
 .sign {
-  padding-top: 0px;
-  color: #0000ff;
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: bold;
-  font-size: 23px;
-  text-align: center;
+    padding-top: 0px;
+    color: #0000ff;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
 }
 
 
 form.form1 {
-  padding-top: 28px;
+    padding-top: 28px;
 }
 
-.btn {
-  cursor: pointer;
-  border-radius: 5px;
-  color: black;
-  background:#eeeeee;
-  border: 0;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  font-family: 'Ubuntu', sans-serif;
-  margin-left: 35%;
-  font-size: 13px;
-  box-shadow: 0px 0px 0px 0px black;
-  margin-top: 39px;
-  margin-bottom: 10px;
-
+.btnAuth {
+    cursor: pointer;
+    border-radius: 5px;
+    color: black;
+    background: #eeeeee;
+    border: solid 1px deeppink;
+    /* top right bottom left */
+    padding: 10px 40px 10px 40px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    box-shadow: 0px 0px 0px 0px black;
 }
 
-.btn:hover {
-  background-color: deeppink;
-  color: white;
-}
-
-
-.btn2 {
-  cursor: pointer;
-  border-radius: 5px;
-  color: black;
-  background:#eeeeee;
-  border: 0;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  font-family: 'Ubuntu', sans-serif;
-  margin-left: 35%;
-  font-size: 13px;
-  box-shadow: 0px 0px 0px 0px black;
-  margin-top: 118px;
-  margin-bottom: 10px;
-
-}
-
-.btn2:hover {
-  background-color: deeppink;
-  color: white;
+.btnAuth:hover {
+    background-color: deeppink;
+    color: white;
 }
 
 .register {
-  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-  color: #ff99cf;
-  padding-top: 20px;
-  margin-left: 34%;
-
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #ff99cf;
 }
 
 a {
-  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-  color: #E1BEE7;
-  text-decoration: none
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    text-decoration: none
 }
 
 
-.imglogo{
-  height: 175px;
-  width: 175px;
-  margin-left: 26%;
+.imglogo {
+    height: 175px;
+    width: 175px;
 }
-.imgbox{
-  max-height: 100px;
-  max-width: 100%;
+
+.imgbox {
+    max-height: 35%;
+    max-width: 100%;
+}
+
+.errorField {
+    color: #FF0000;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
 }
 
 
 /* ============CHAT=================*/
 
 .form {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 0.25rem;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  height: 3rem;
-  box-sizing: border-box;
-  backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.15);
+    padding: 0.25rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 3rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
 }
 
 .inputChat {
-  border: none;
-  padding: 0 1rem;
-  flex-grow: 1;
-  border-radius: 2rem;
-  margin: 0.25rem;
+    border: none;
+    padding: 0 1rem;
+    flex-grow: 1;
+    border-radius: 2rem;
+    margin: 0.25rem;
 }
 
 .inputChat:focus {
-  outline: none;
+    outline: none;
 }
 
 .form > button {
-  background: #333;
-  border: none;
-  padding: 0 1rem;
-  margin: 0.25rem;
-  border-radius: 3px;
-  outline: none;
-  color: #fff;
+    background: #333;
+    border: none;
+    padding: 0 1rem;
+    margin: 0.25rem;
+    border-radius: 3px;
+    outline: none;
+    color: #fff;
 }
 
 .messageChat {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .messagesChat > li {
-  padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
 }
 
 .messagesChat > li:nth-child(odd) {
-  background: #efefef;
+    background: #efefef;
 }
 
 /*==================CHAT================*/
 
 
-
 .formChat {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 0.25rem;
-  position: fixed;
-  bottom: 0;
-  left: 16%;
-  right: 0;
-  display: flex;
-  height: 3rem;
-  box-sizing: border-box;
-  backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.15);
+    padding: 0.25rem;
+    position: fixed;
+    bottom: 0;
+    left: 16%;
+    right: 0;
+    display: flex;
+    height: 3rem;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
 }
 
 .formChat > button {
-  background: #333;
-  border: none;
-  padding: 0 1rem;
-  margin: 0.25rem;
-  border-radius: 3px;
-  outline: none;
-  color: #fff;
+    background: #333;
+    border: none;
+    padding: 0 1rem;
+    margin: 0.25rem;
+    border-radius: 3px;
+    outline: none;
+    color: #fff;
 }
 
 .inputChat {
-  border: none;
-  padding: 0 1rem;
-  flex-grow: 1;
-  border-radius: 2rem;
-  margin: 0.25rem;
+    border: none;
+    padding: 0 1rem;
+    flex-grow: 1;
+    border-radius: 2rem;
+    margin: 0.25rem;
 }
 
 .inputChat:focus {
-  outline: none;
+    outline: none;
 }
 
-.btnChat{
-  width: 100px;
+.btnChat {
+    width: 100px;
 }
 
-.sideBar{
-  max-width: 100%;
-  border: solid;
-  height:98%;
-  min-height:30px;
+.sideBar {
+    max-width: 100%;
+    border: solid;
+    height: 98%;
+    min-height: 30px;
 }
 
 .messages {
-  list-style-type: none;
-  margin-left: 16%;
-  padding: 0;
+    list-style-type: none;
+    margin-left: 16%;
+    padding: 0;
 }
 
 .messages > li {
-  padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
 }
 
 .messages > li:nth-child(odd) {
-  background: #efefef;
+    background: #efefef;
 }
 
 
 .wrapper {
-  width: 100%;
-  border: 1px solid black;
-  overflow: hidden; /* add this to contain floated children */
-  height: 98%;
+    width: 100%;
+    border: 1px solid black;
+    overflow: hidden; /* add this to contain floated children */
+    height: 98%;
 }
+
 .first {
-  width: 300px;
-  float:left; /* add this */
-  border: 1px solid red;
-  height: 100%;
+    width: 300px;
+    float: left; /* add this */
+    border: 1px solid red;
+    height: 100%;
 }
+
 .second {
-  border: 1px solid green;
-  float: left; /* add this */
-  height: 100%;
+    border: 1px solid green;
+    float: left; /* add this */
+    height: 100%;
 }

@@ -1,17 +1,21 @@
 extends layout
 
 block content
-    //h1= title
     div.main
         div.imgbox
             img.imglogo(src='/pictures/logo_transparent.png' alt='logo')
-        //p.sign Welcome to #{title}
-        form.form1(action="/login/verification", method="POST")
+        div.alignInput
             div.inputwrapper
                 img.inputicon(src='/pictures/user.png' alt='mail icon')
-                input.inputfield(name="username", type="text", placeholder="Enter your username", required='true',maxlength="255")
+                input#username.inputfield(type="text", placeholder="Enter your username", required='true',maxlength="255")
             div.inputwrapper
                 img.inputicon(src='/pictures/password.png' alt='mail icon')
-                input.inputfield(name="password", type="password", placeholder="Enter your password", required='true',maxlength="255")
-            button.btn2(type="submit") Login
-        a.register(class='button', href='/registration') Have no Account?
+                input#password.inputfield(type="password", placeholder="Enter your password", required='true',maxlength="255")
+        div.alignWrapper
+            div.btnWrapper
+                button#btnLogin.btnAuth() Login
+            div.btnWrapper
+                label#lError.errorField()
+            div.btnWrapper
+                a.register(class='button', href='/registration') Have no Account?
+    script(src='javascripts/login.js')

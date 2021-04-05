@@ -21,20 +21,18 @@ exports.verification = async function (req, res) {
     const body = req.body;
     await userService.getByUsername(body.username, async function (err, user) {
         if (err) {
-            return res.status(500).send('Server Error');
+            return res.send({status: 500, error: 'Server Error'});
         }
         if (user) {
             const isPWValid = await authBundle.getBcrypt().compare(body.password, user.password);
             if (isPWValid) {
                 await tokenGenerator(res, user.id);
-                /*res.status(200).send({auth: true});*/
-                res.redirect('/chat');
+                res.send({status: 200, auth: true, location: '/chat'});
             } else {
-                // TODO Add label for feedback to pug file
-                return res.status(401).send({auth: false, token: null});
+                return res.send({status: 401, auth: false, token: null, error: "Username or password wrong."});
             }
         } else {
-            res.status(404).send('User not found');
+            res.send({status: 404, auth: false, token: null, error: "Username or password wrong."});
         }
     });
 }
@@ -45,6 +43,5 @@ exports.verification = async function (req, res) {
  * @param res
  */
 exports.logout = function (req, res) {
-    /*res.status(200).send({auth: false});*/
-    res.redirect('/login');
+    res.send({status: 200, auth: false, location: '/login'});
 }

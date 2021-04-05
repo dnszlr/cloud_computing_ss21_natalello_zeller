@@ -22,7 +22,7 @@ exports.getRegistration = function (req, res) {
 exports.register = async function (req, res) {
     const body = req.body;
     if (!(body.username && body.password)) {
-        return res.status(400).send({error: "Incoming data invalid"});
+        return res.send({status: 400, error: "Incoming data invalid"});
     }
     const encryptionParam = authBundle.getEncryptionParam();
     const salt = await authBundle.getBcrypt().genSalt(encryptionParam);
@@ -30,10 +30,9 @@ exports.register = async function (req, res) {
     await userService.add(body, async function (err, user) {
         if (user) {
             await tokenGenerator(res, user.id);
-            /*res.status(200).send({auth: true});*/
-            res.redirect('/login');
+            res.send({status: 200, auth: true, location: '/login'});
         } else {
-            return res.status(500).send({error: "Error occurred while registration process: " + err});
+            return res.send({status: 500, error: err});
         }
     });
 }

@@ -13,9 +13,6 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    superpower: {
-        type: String
-    },
     password: {
         type: String,
         required: true

@@ -1,22 +1,25 @@
 extends layout
 
 block content
-    //h1= title
-
     div.main
         div.imgbox
             img.imglogo(src='/pictures/logo_transparent.png' alt='logo')
-        form.form1(action="/registration", method="POST")
+        div.alignInput
             div.inputwrapper
-                img.inputicon(src='/pictures/mail.png' alt='mail icon')
-                input.inputfield(name = "email", type="email", placeholder="Enter your email address", required='true',maxlength="255")
+                    img.inputicon(src='/pictures/mail.png' alt='mail icon')
+                    input#email.inputfield(type="email", placeholder="Enter your email address", required='true',maxlength="255")
             div.inputwrapper
-                img.inputicon(src='/pictures/user.png' alt='mail icon')
-                input.inputfield(name = "username", type="text", placeholder="Enter your username", required='true',maxlength="255")
+                    img.inputicon(src='/pictures/user.png' alt='mail icon')
+                    input#username.inputfield(name = "username", type="text", placeholder="Enter your username", required='true',maxlength="255")
             div.inputwrapper
-                img.inputicon(src='/pictures/password.png' alt='mail icon')
-                input.inputfield(name = "password", type="password", placeholder="Enter your password", required='true',maxlength="255")
-            //input.inputfield(name = "superpower", type="text", placeholder="Enter your superpower")
-            button.btn(type="submit") Register
-            a(href='#')
-            a.register(class='button', href='/login') Have an Account?
+                    img.inputicon(src='/pictures/password.png' alt='mail icon')
+                    input#password.inputfield(name = "password", type="password", placeholder="Enter your password", required='true',maxlength="255")
+        div.alignWrapper
+            div.btnWrapper
+                button#btnRegister.btnAuth() Register
+            div.btnWrapper
+                label#lError.errorField()
+            div.btnWrapper
+                a.register(class='button', href='/login') Have an Account?
+
+    script(src='javascripts/registration.js')
