@@ -4,11 +4,19 @@ block content
     div.wrapper()
         div.first()
             div.sideBar
+                div.personalInfo()
+                    a() MY USERNAME and Picture
+                div.serverInfo()
+                    a() Active User
+                    ul.serverList
+                     li() test
+                     li() test
+                     li() test
         div.second()
-        ul#messages.messages()
-        form#formChat.formChat()
-            input#inputChat.inputChat(type="text", placeholder="Enter your message")
-            button#btnChat.btnChat() Send
+            ul#messages.messages()
+            form#formChat.formChat()
+                input#inputChat.inputChat(type="text", placeholder="Enter your message")
+                button#btnChat.btnChat() Send
 
     script(src='/socket.io/socket.io.js')
     script(src='javascripts/chat.js')

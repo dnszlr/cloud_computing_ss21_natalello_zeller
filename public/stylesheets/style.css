@@ -1,12 +1,13 @@
+html {
+    height: 100%;
+    width: 100%;
+}
 body {
     background-color: white;
     font-family: Segoe UI, sans-serif;
+    height: 98%;
+    width: 99%;
 }
-
-html {
-    height: 100%;
-}
-
 
 .main {
     background-color: #FFFFFF;
@@ -30,7 +31,7 @@ html {
 }
 
 .inputfield:hover {
-    border-color: deeppink;
+    border-color: #ff6600;
 }
 
 .inputwrapper {
@@ -45,11 +46,11 @@ html {
 }
 
 .inputwrapper:hover {
-    border-color: deeppink;
+    border-color: #ff6600;
 }
 
 .inputwrapper:focus {
-    border-bottom-color: deeppink;
+    border-bottom-color: #ff6600;
 }
 
 .alignInput {
@@ -88,7 +89,7 @@ form.form1 {
     cursor: pointer;
     border-radius: 5px;
     color: black;
-    background: #ff149385;
+    background: #ffd1b3;
     border: solid 1px deeppink;
     /* top right bottom left */
     padding: 10px 40px 10px 40px;
@@ -100,13 +101,13 @@ form.form1 {
 }
 
 .btnAuth:hover {
-    background-color: deeppink;
+    background-color: #ff6600;
     color: white;
 }
 
 .register {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #ff99cf;
+    color: #ffd1b3;
     font-size: 17px;
 }
 
@@ -134,56 +135,7 @@ a {
 }
 
 
-/* ============CHAT=================*/
 
-.form {
-    background: rgba(0, 0, 0, 0.15);
-    padding: 0.25rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    height: 3rem;
-    box-sizing: border-box;
-    backdrop-filter: blur(10px);
-}
-
-.inputChat {
-    border: none;
-    padding: 0 1rem;
-    flex-grow: 1;
-    border-radius: 2rem;
-    margin: 0.25rem;
-}
-
-.inputChat:focus {
-    outline: none;
-}
-
-.form > button {
-    background: #333;
-    border: none;
-    padding: 0 1rem;
-    margin: 0.25rem;
-    border-radius: 3px;
-    outline: none;
-    color: #fff;
-}
-
-.messageChat {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.messagesChat > li {
-    padding: 0.5rem 1rem;
-}
-
-.messagesChat > li:nth-child(odd) {
-    background: #efefef;
-}
 
 /*==================CHAT================*/
 
@@ -192,9 +144,9 @@ a {
     background: rgba(0, 0, 0, 0.15);
     padding: 0.25rem;
     position: fixed;
-    bottom: 0;
-    left: 16%;
-    right: 0;
+    bottom: 3%;
+    left: 25%;
+    right: 0.4%;
     display: flex;
     height: 3rem;
     box-sizing: border-box;
@@ -236,8 +188,10 @@ a {
 
 .messages {
     list-style-type: none;
-    margin-left: 16%;
+    margin-left: 0%;
     padding: 0;
+    overflow-y: scroll;
+    height: 95%;
 }
 
 .messages > li {
@@ -245,7 +199,7 @@ a {
 }
 
 .messages > li:nth-child(odd) {
-    background: #efefef;
+    background: #ffd1b3;
 }
 
 
@@ -257,14 +211,34 @@ a {
 }
 
 .first {
-    width: 300px;
-    float: left; /* add this */
-    border: 1px solid red;
+    width: 24.7%;
+    /*border: 1px solid red;*/
+    max-width: 100%;
+    float: left;
     height: 100%;
 }
 
 .second {
     border: 1px solid green;
-    float: left; /* add this */
+    float: left;
+    max-width: 100%;
+    width: 75%;
+    height: 97%;
+}
+.personalInfo{
+    height: 20%;
+    border: solid;
+    border-color: pink;
+}
+.serverInfo{
     height: 100%;
+    border: solid;
+    border-color: deepskyblue;
+}
+.serverList {
+    list-style-type: none;
+    margin-left: 0%;
+    padding: 0;
+    /*overflow-y: scroll;*/
+    height: 50%;
 }
