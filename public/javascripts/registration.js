@@ -15,11 +15,9 @@ getElement("btnRegister").addEventListener("click", function (event) {
 });
 
 async function register() {
-
     let data = {email: getElement("email").value, username: getElement("username").value, password: getElement("password").value}
     const response = await postRequest("/registration", data);
     if (response.status == 200) {
-        alert("Your account was successfully registered");
         window.location.href = response.location;
     } else if(response.status == 500) {
         getElement("lError").innerHTML = response.error;

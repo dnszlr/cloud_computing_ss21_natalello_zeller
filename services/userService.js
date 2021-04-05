@@ -3,7 +3,7 @@ const User = require('../models/user');
 class UserService {
 
     /**
-     * Adds a new user to the databse
+     * Adds a new user to the database
      * @param data: the data passed by the request body to the service.
      * @param callback
      * @returns {Promise<void>}

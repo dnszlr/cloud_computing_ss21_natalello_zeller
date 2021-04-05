@@ -8,7 +8,7 @@ const tokenGenerator = require("../auth/tokenGenerator");
  * @param req
  * @param res
  */
-exports.getRegistration = function (req, res) {
+getRegistration = function (req, res) {
     res.render('registration', {title: 'Registration'});
 }
 /**
@@ -19,7 +19,7 @@ exports.getRegistration = function (req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-exports.register = async function (req, res) {
+register = async function (req, res) {
     const body = req.body;
     if (!(body.username && body.password)) {
         return res.send({status: 400, error: "Incoming data invalid"});
@@ -35,4 +35,9 @@ exports.register = async function (req, res) {
             return res.send({status: 500, error: err});
         }
     });
+}
+
+module.exports = {
+    getRegistration,
+    register
 }

@@ -6,7 +6,7 @@ const tokenGenerator = require('../auth/tokenGenerator')
  * @param req
  * @param res
  */
-exports.getLogin = function (req, res) {
+getLogin = function (req, res) {
     res.render('login', {title: 'Login'});
 }
 
@@ -17,7 +17,7 @@ exports.getLogin = function (req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-exports.verification = async function (req, res) {
+verification = async function (req, res) {
     const body = req.body;
     await userService.getByUsername(body.username, async function (err, user) {
         if (err) {
@@ -27,7 +27,7 @@ exports.verification = async function (req, res) {
             const isPWValid = await authBundle.getBcrypt().compare(body.password, user.password);
             if (isPWValid) {
                 await tokenGenerator(res, user.id);
-                res.send({status: 200, auth: true, location: '/chat'});
+                res.send({status: 200, auth: true, location: '/chat?username=' + user.username});
             } else {
                 return res.send({status: 401, auth: false, token: null, error: "Username or password wrong."});
             }
@@ -42,6 +42,12 @@ exports.verification = async function (req, res) {
  * @param req
  * @param res
  */
-exports.logout = function (req, res) {
+logout = function (req, res) {
     res.send({status: 200, auth: false, location: '/login'});
 }
+
+module.exports = {
+  getLogin,
+  verification,
+  logout
+};

@@ -4,14 +4,13 @@ block content
     div.wrapper()
         div.first()
             div.sideBar
-
-
         div.second()
-        ul.messages()
-            li Test
-            li Test2
-            form.formChat()
-                input.inputChat(name="massage", type="text", placeholder="Enter your username")
-                button.btnChat(type='submit') Send
+        ul#messages.messages()
+        form#formChat.formChat()
+            input#inputChat.inputChat(type="text", placeholder="Enter your message")
+            button#btnChat.btnChat() Send
+
+    script(src='/socket.io/socket.io.js')
+    script(src='javascripts/chat.js')
 
 

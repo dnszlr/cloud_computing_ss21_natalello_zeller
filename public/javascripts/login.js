@@ -25,7 +25,6 @@ async function login() {
     const response = await postRequest("/login/verification", data);
     getElement("lError").innerHTML = response.status;
     if (response.status == 200) {
-        alert("Your account was successfully logged in");
         window.location.href = response.location;
     } else if(response.status == 404 || response.status == 401) {
         getElement("lError").innerHTML = response.error;
