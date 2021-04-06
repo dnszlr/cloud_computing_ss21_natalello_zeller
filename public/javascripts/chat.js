@@ -2,6 +2,7 @@ const socket = io();
 let messages = document.getElementById('messages');
 let form = document.getElementById('formChat');
 let input = document.getElementById('inputChat');
+let userList = document.getElementById('userList');
 
 /**
  * Adds Eventlistener for form to emit messages to server.
@@ -33,10 +34,25 @@ socket.on('chat message', function (msg) {
 /**
  * Receives all messages from server
  */
-socket.on('message', function (msg) {
+socket.on('information', function (msg) {
     console.log(msg);
     appendMsg(msg);
 });
+
+socket.on('updateUserList', function (backendUserList) {
+    userList.innerHTML = '';
+    console.log(backendUserList);
+    updateUser(backendUserList)
+});
+
+function updateUser(backendUserList) {
+    backendUserList.forEach(user => {
+        console.log(user);
+        let username = document.createElement('li');
+        username.textContent = user.username;
+        userList.appendChild(username);
+    });
+}
 
 /**
  * Appends passed message msg to chat.html
@@ -44,7 +60,7 @@ socket.on('message', function (msg) {
  */
 function appendMsg(msg) {
     let item = document.createElement('li');
-    item.textContent = msg.username + ' ' + msg.time + ' ' + msg.message ;
+    item.textContent = msg.username + ' ' + msg.time + ' ' + msg.message;
     messages.appendChild(item);
     console.log("Document height: " + document.body.scrollHeight);
     messages.scrollTop = messages.scrollHeight;
