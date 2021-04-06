@@ -10,7 +10,12 @@ function getCurrentUser(id) {
     return users.find(user => user.id === id);
 }
 
+function getAllUsers() {
+    return users;
+}
+
 module.exports = {
     addUser,
-    getCurrentUser
+    getCurrentUser,
+    getAllUsers
 }

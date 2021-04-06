@@ -46,7 +46,8 @@ function appendMsg(msg) {
     let item = document.createElement('li');
     item.textContent = msg.username + ' ' + msg.time + ' ' + msg.message ;
     messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    console.log("Document height: " + document.body.scrollHeight);
+    messages.scrollTop = messages.scrollHeight;
 }
 
 /**
