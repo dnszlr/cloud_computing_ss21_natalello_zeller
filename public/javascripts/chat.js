@@ -1,69 +1,186 @@
 const socket = io();
-let messages = document.getElementById('messages');
-let form = document.getElementById('formChat');
-let input = document.getElementById('inputChat');
-let userList = document.getElementById('userList');
+// Elements on the left of the view
+let ulUser = document.getElementById('ulUser');
+let aUsername = document.getElementById('aUsername');
+// Room navigation
+let ulRoomNav = document.getElementById('ulRoomNav');
+// Input at the bottom
+let formChat = document.getElementById('formChat');
+let inputChat = document.getElementById('inputChat');
+// Chatroom in the middle
+let chatRoom = document.getElementById('chatRoom');
+// Current watched ulMessage
+let activeWindow = '';
+// Safes all windows for z-value handling
+let windowStorage = [];
+
+function setActiveWindow(chatWindow) {
+    return activeWindow = chatWindow;
+}
+
+initView('Shaed');
+
+/**
+ * Initialization function for the chat view.
+ */
+function initView(initChatName) {
+    addRoom(initChatName);
+    appendWindowToChatRoom(initChatName);
+    // Emits username to server, initial 'say hello' from client to server.
+    let username = getFromUri('username');
+    socket.emit('tellUsername', {username: username, window: activeWindow.id});
+}
+
+
+/**
+ * Adds clickListener to user list to append a new chat window on click
+ */
+ulRoomNav.addEventListener('click', function (navbarElement) {
+    let navbarName = navbarElement.target.textContent;
+    appendWindowToChatRoom(navbarName);
+});
+
+/**
+ * Adds clickListener to user list to append a new chat window on click
+ */
+ulUser.addEventListener('click', function (userListElement) {
+    let roomName = userListElement.target.textContent;
+    if (roomName === getFromUri('username')) {
+        // TODO user clicked himself, no window can be opened?
+    } else {
+        addRoom(roomName);
+    }
+});
+
+function bringUpChatWindow(chatWindow) {
+    windowStorage.forEach(window => {
+        window === chatWindow ? window.className = 'messages' : window.className = 'messagesHidden';
+    });
+}
+
+function appendWindowToChatRoom(chatName) {
+    console.log("chatName in append: " + chatName);
+    let chatWindow = getChatWindow(chatName);
+    if (!chatWindow) {
+        chatWindow = createChatWindow(chatName);
+    }
+    chatRoom.appendChild(chatWindow);
+    bringUpChatWindow(chatWindow);
+    setActiveWindow(chatWindow);
+    return chatWindow;
+}
+
+function getChatWindow(chatName) {
+    return windowStorage.find(windowName => windowName.id === chatName);
+}
+
+/**
+ * Creates a new chat window
+ * @param chatName: name of the new !!!chat must have the same name as the private chat user!!!
+ */
+function createChatWindow(chatName) {
+    let chatWindow = document.createElement('ul');
+    chatWindow.className = 'messages';
+    chatWindow.id = chatName;
+    windowStorage.push(chatWindow);
+    return chatWindow;
+}
+
+/**
+ * Adds a new room to navbar !!!navbar entry must have the same name as the private chat user!!!
+ * @param roomName
+ */
+function addRoom(roomName) {
+    if (!ulRoomNavContains(roomName)) {
+        let item = document.createElement('li');
+        item.textContent = roomName;
+        ulRoomNav.appendChild(item);
+    }
+}
 
 /**
  * Adds Eventlistener for form to emit messages to server.
  */
-form.addEventListener('submit', function (event) {
+formChat.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (input.value) {
+    if (inputChat.value) {
         // Emit message to server
-        socket.emit('chat message', input.value);
+        socket.emit('chat message', {message: inputChat.value, window: activeWindow.id});
         // Reset input value
-        input.value = '';
-        input.focus();
+        inputChat.value = '';
+        inputChat.focus();
     }
 });
 
 /**
- * Emits username to server
- */
-socket.emit('tellUsername', getFromUri('username'));
-
-/**
  * Receives all chat messages from server
  */
-socket.on('chat message', function (msg) {
-    console.log(msg);
-    appendMsg(msg);
+socket.on('chat message', function (data) {
+    let chatWindow = appendWindowToChatRoom(data.window);
+    addRoom(data.window);
+    appendMsg(data.message, chatWindow);
 });
 
 /**
  * Receives all messages from server
  */
-socket.on('information', function (msg) {
-    console.log(msg);
-    appendMsg(msg);
+socket.on('information', function (data) {
+    let chatWindow = appendWindowToChatRoom(data.window);
+    addRoom(data.window);
+    appendMsg(data.message, chatWindow);
 });
-
-socket.on('updateUserList', function (backendUserList) {
-    userList.innerHTML = '';
-    console.log(backendUserList);
-    updateUser(backendUserList)
-});
-
-function updateUser(backendUserList) {
-    backendUserList.forEach(user => {
-        console.log(user);
-        let username = document.createElement('li');
-        username.textContent = user.username;
-        userList.appendChild(username);
-    });
-}
 
 /**
  * Appends passed message msg to chat.html
  * @param msg
  */
-function appendMsg(msg) {
+function appendMsg(msg, window) {
     let item = document.createElement('li');
     item.textContent = msg.username + ' ' + msg.time + ' ' + msg.message;
-    messages.appendChild(item);
-    console.log("Document height: " + document.body.scrollHeight);
-    messages.scrollTop = messages.scrollHeight;
+    window.appendChild(item);
+    window.scrollTop = activeWindow.scrollHeight;
+}
+
+/**
+ * Socket listens on server messages for new logged in users
+ */
+socket.on('updateUserList', function (backendUserList) {
+    ulUser.innerHTML = '';
+    updateUser(backendUserList);
+});
+
+/**
+ * Sets the username and later in the project gets the profile picture from the server
+ */
+socket.on('init', function (username) {
+    aUsername.innerText = username;
+});
+
+/**
+ * Updates the current logged in User List on the View
+ * @param backendUserList from server received user list.
+ */
+function updateUser(backendUserList) {
+    backendUserList.forEach(user => {
+        let userListElement = document.createElement('li');
+        userListElement.textContent = user.username;
+        ulUser.appendChild(userListElement);
+    });
+}
+
+
+function ulRoomNavContains(roomName) {
+    let rooms = ulRoomNav.getElementsByTagName('li');
+    let contains = false;
+    for (let i = 0; i < rooms.length; i++) {
+        console.log(rooms[i]);
+        if (rooms[i].textContent === roomName) {
+            contains = true;
+            break;
+        }
+    }
+    console.log(contains);
+    return contains;
 }
 
 /**

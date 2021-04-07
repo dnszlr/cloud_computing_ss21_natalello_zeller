@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {addUser, getCurrentUser, getAllUsers} = require("../services/chatService");
+const {addUser, removeUser, getCurrentUser, getAllUsers} = require("../services/chatService");
 const bot = 'Shaed-Bot';
 
 /**
@@ -19,26 +19,27 @@ getChat = function (req, res, next) {
  */
 function initSocketIo(io) {
     io.on('connection', (socket) => {
-        socket.on('tellUsername', username => {
-            addUser(socket.id, username);
+        socket.on('tellUsername', data => {
+            addUser(socket.id, data.username);
+            console.log(data.window);
             let users = getAllUsers();
             // On connect for new user
-            socket.emit('information', formatMessage(bot, 'Welcome to Shaed: ' + getCurrentUser(socket.id).username));
-            socket.emit('updateUserList', users);
+            socket.emit('information', {message: formatMessage(bot, 'Welcome to Shaed ' + getCurrentUser(socket.id).username), window: data.window});
+            socket.emit('init', data.username);
+            // Sends logged in user list to everyone in chatroom
+            io.emit('updateUserList', users);
             // On connect for other users
-            socket.broadcast.emit('information', formatMessage(bot, getCurrentUser(socket.id).username + ' conntected to Shaed!', users));
-            socket.broadcast.emit('updateUserList', users);
-
-            // CHAT MESSAGE
-            socket.on('chat message', (msg) => {
-                io.emit('chat message', formatMessage(getCurrentUser(socket.id).username, msg));
-            });
-
-            // DISCONNECT
-            socket.on('disconnect', () => {
-                io.emit('information', formatMessage(bot, getCurrentUser(socket.id).username + ' disconnected from Shaed!'));
-                io.emit('updateUserList', users);
-            });
+            socket.broadcast.emit('information', {message: formatMessage(bot, getCurrentUser(socket.id).username + ' conntected to Shaed!'), window: data.window});
+        });
+        // CHAT MESSAGE
+        socket.on('chat message', data => {
+            io.emit('chat message', {message: formatMessage(getCurrentUser(socket.id).username, data.message), window: data.window});
+        });
+        // DISCONNECT
+        socket.on('disconnect', async () => {
+            io.emit('information', formatMessage(bot, getCurrentUser(socket.id).username + ' disconnected from Shaed!'));
+            await removeUser(getCurrentUser(socket.id).id);
+            io.emit('updateUserList', getAllUsers());
         });
     });
 }

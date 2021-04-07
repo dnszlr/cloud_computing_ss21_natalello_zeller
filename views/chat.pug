@@ -5,12 +5,13 @@ block content
         div.first()
             div.sideBar
                 div.personalInfo()
-                    a() MY USERNAME and Picture
+                    a#aUsername()
                 div.serverInfo()
                     a() Active User
-                    ul#userList.userList
+                    ul#ulUser.userList
         div.second()
-            ul#messages.messages()
+            ul#ulRoomNav.roomNav()
+            div#chatRoom.chatRoom()
             form#formChat.formChat()
                 input#inputChat.inputChat(type="text", placeholder="Enter your message")
                 button#btnChat.btnChat() Send

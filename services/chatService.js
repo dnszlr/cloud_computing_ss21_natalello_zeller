@@ -8,13 +8,16 @@ let users = [...new Set()];
  */
 function addUser(id, username) {
     const user = {id, username};
-    let existingUserIndex = users.indexOf(users.find(user => user.username === username));
-    if (existingUserIndex != -1) {
-        users[existingUserIndex] = user;
-    } else {
-        users.push(user);
-    }
-    return user;
+    return users.push(user);;
+}
+
+/**
+ * Removes the user with the passed id
+ * @param id
+ */
+async function removeUser(id) {
+    const userToDeleteIndex = await users.findIndex(user => user.id == id);
+    users.splice(userToDeleteIndex, 1);
 }
 
 /**
@@ -27,7 +30,6 @@ function getCurrentUser(id) {
 }
 
 /**
- *
  * @returns All users who are currently logged in.
  */
 function getAllUsers() {
@@ -36,6 +38,7 @@ function getAllUsers() {
 
 module.exports = {
     addUser,
+    removeUser,
     getCurrentUser,
     getAllUsers
 }
