@@ -1,20 +1,25 @@
 extends layout
 
 block content
+
     div.wrapper()
         div.first()
             div.sideBar
                 div.personalInfo()
-                    a#aUsername()
+                    a#aUsername.userList()
                 div.serverInfo()
-                    a() Active User
+                    div.deco()
+                    div.helperDiv()
+                        a.infoText() Active User
                     ul#ulUser.userList
+                    div.deco()
         div.second()
             ul#ulRoomNav.roomNav()
             div#chatRoom.chatRoom()
             form#formChat.formChat()
                 input#inputChat.inputChat(type="text", placeholder="Enter your message")
-                button#btnChat.btnChat() Send
+                button#btnChat.btnChat(style='background-image: url(/pictures/sendIcon.png);')
+                button.btnChat(style='background-image: url(/pictures/picIcon.png);')
 
     script(src='/socket.io/socket.io.js')
     script(src='javascripts/chat.js')
