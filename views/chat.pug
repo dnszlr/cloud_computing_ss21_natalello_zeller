@@ -16,19 +16,13 @@ block content
                     div.helperDiv() Active User
                     ul#ulUser.userList
                     div.deco()
-                    div.helperDiv() Groups
                     div.helperDiv()
-                        button.btnAdd()  add a group
-                    ul.groupList()
-                        li() Group 1
-                        li() Group 2
-                        li() Group 3
-                        li() Group 3
-                        li() Group 3
-                        li() Group 3
-                        li() Group 3
-                        li() Group 3
-                        li() Group 3
+                        button#btnAddGroup.btnAdd()  add a group
+                        div#modalWindow.modal()
+                            div#modalContent.modal-content()
+                                span#spanClose.close() &#x2715
+                                input#groupName
+                                button#createGroup.btnAdd()
                     div.deco()
         div.second()
             ul#ulRoomNav.roomNav()

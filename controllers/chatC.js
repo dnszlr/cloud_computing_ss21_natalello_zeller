@@ -40,6 +40,11 @@ function initSocketIo(io) {
             socket.emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.to, to: data.from});
             io.to(data.to.id).emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.from, to: data.to});
         })
+
+        // GROUP MESSAGE
+        socket.on('group message', data => {
+
+        });
         // DISCONNECT
         socket.on('disconnect', async () => {
             io.emit('information', formatMessage(bot, getUserById(socket.id).username + ' disconnected from Shaed!'));
@@ -59,7 +64,7 @@ function formatMessage(username, message) {
     return {
         username,
         message,
-        time: moment().format('hh:mm:ss')
+        time: moment().format('HH:mm:ss')
     }
 }
 

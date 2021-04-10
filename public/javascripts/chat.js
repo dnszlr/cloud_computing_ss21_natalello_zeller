@@ -20,6 +20,10 @@ let username = getFromUri('username');
 // All logged in users
 let users = [];
 
+let modal = document.getElementById("modalWindow");
+let btnAddGroup = document.getElementById('btnAddGroup');
+let btnClose = document.getElementById('spanClose');
+
 function setActiveWindow(chatWindow) {
     return activeWindow = chatWindow;
 }
@@ -54,9 +58,9 @@ ulRoomNav.addEventListener('click', function (navbarElement) {
  * Adds clickListener to user list to append a new chat window on click
  */
 ulUser.addEventListener('click', function (userListElement) {
-    let roomName = userListElement.target.textContent;
-    if (roomName != getFromUri('username')) {
-        addRoom(roomName);
+    let username = userListElement.target.textContent;
+    if (ulUserContains(username) && username != getFromUri('username')) {
+        addRoom(username);
     }
 });
 
@@ -95,6 +99,11 @@ function appendWindowToChatRoom(chatName) {
     return chatWindow;
 }
 
+/**
+ * Returns a chat window by a passed name
+ * @param chatName
+ * @returns a chat window
+ */
 function getChatWindow(chatName) {
     return windowStorage.find(storageWindow => storageWindow.id === chatName);
 }
@@ -151,7 +160,7 @@ socket.on('information', function (message) {
  */
 function appendMsg(msg, window) {
     let item = document.createElement('li');
-    item.textContent = msg.username + ' ' + msg.time + ' ' + msg.message;
+    item.innerHTML = msg.username + ' ' + msg.time + '<br>' + msg.message;
     window.appendChild(item);
     window.scrollTop = activeWindow.scrollHeight;
 }
@@ -184,12 +193,33 @@ function updateUser(backendUserList) {
     });
 }
 
-
+/**
+ * Searches ulRoomNav for a specific roomName
+ * @param roomName: the roomName we are looking for
+ * @returns true if ulRoomNav contains the passed username
+ */
 function ulRoomNavContains(roomName) {
     let rooms = ulRoomNav.getElementsByTagName('li');
     let contains = false;
     for (let i = 0; i < rooms.length; i++) {
         if (rooms[i].textContent === roomName) {
+            contains = true;
+            break;
+        }
+    }
+    return contains;
+}
+
+/**
+ * Searches ulUser for a specific username
+ * @param username: the username we are looking for
+ * @returns true if ulUser contains the passed username
+ */
+function ulUserContains(username) {
+    let users = ulUser.getElementsByTagName('li');
+    let contains = false;
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].textContent === username) {
             contains = true;
             break;
         }
@@ -208,6 +238,25 @@ function getFromUri(element) {
     return urlParam.get(element);
 }
 
+/**
+ * Searches the logged in user list for a given username
+ * @param username: the username we are looking for
+ * @returns
+ */
 function getUserFromUsername(username) {
     return users.find(user => user.username === username);
+}
+
+btnAddGroup.onclick = function() {
+    modal.style.display = "block";
+}
+
+btnClose.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if(event.target == modal) {
+        modal.style.display ="none";
+    }
 }
