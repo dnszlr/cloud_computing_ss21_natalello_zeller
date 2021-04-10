@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {addUser, removeUser, getUserById, getAllUsers} = require("../services/chatService");
+const {addUser, removeUser, getUserById, getByUsername, getAllUsers} = require("../services/chatService");
 const bot = 'Shaed-Bot';
 
 /**
@@ -34,17 +34,28 @@ function initSocketIo(io) {
         socket.on('chat message', message => {
             io.emit('chat message', formatMessage(getUserById(socket.id).username, message));
         });
-
         // PRIVAT MESSAGE
         socket.on('private message', data => {
             socket.emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.to, to: data.from});
             io.to(data.to.id).emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.from, to: data.to});
         })
-
         // GROUP MESSAGE
         socket.on('group message', data => {
-
+            console.log(data.groupName);
+            io.to(data.groupName).emit('group message', {message: formatMessage(getUserById(socket.id).username, data.message), groupName: data.groupName});
         });
+
+        // JOIN GROUP
+        socket.on('createGroup', data => {
+            for (let i = 0; i < data.groupUser.length; i++) {
+                io.to(data.groupUser[i].id).emit('group invite', data.groupName);
+            }
+        });
+
+        socket.on('group invite', groupName => {
+            socket.join(groupName);
+        });
+
         // DISCONNECT
         socket.on('disconnect', async () => {
             io.emit('information', formatMessage(bot, getUserById(socket.id).username + ' disconnected from Shaed!'));

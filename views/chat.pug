@@ -21,17 +21,9 @@ block content
                         div#modalWindow.modal()
                             div#modalContent.modal-content()
                                 span#spanClose.close() &#x2715
-                                input#groupName
+                                input#inputGroupName()
+                                form#userSelection()
                                 button#createGroup.btnAdd()
-                                form()
-                                    input#vehicle1(type='checkbox' name='vehicle1' value='Bike')
-                                    label(for='vehicle1')  I have a bike
-                                    br
-                                    input#vehicle2(type='checkbox' name='vehicle2' value='Bike')
-                                    label(for='vehicle2')  I have a bike
-                                    br
-                                    input#vehicle3(type='checkbox' name='vehicle3' value='Bike')
-                                    label(for='vehicle3')  I have a bike
                     div.deco()
         div.second()
             ul#ulRoomNav.roomNav()

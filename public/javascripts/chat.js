@@ -9,6 +9,8 @@ let formChat = document.getElementById('formChat');
 let inputChat = document.getElementById('inputChat');
 // Chatroom in the middle
 let chatRoom = document.getElementById('chatRoom');
+// Main Chat Window name
+const mainName = 'Shaed';
 // Main Chat Window
 let mainWindow = '';
 // Current watched window
@@ -20,15 +22,8 @@ let username = getFromUri('username');
 // All logged in users
 let users = [];
 
-let modal = document.getElementById("modalWindow");
-let btnAddGroup = document.getElementById('btnAddGroup');
-let btnClose = document.getElementById('spanClose');
 
-function setActiveWindow(chatWindow) {
-    return activeWindow = chatWindow;
-}
-
-initView('Shaed');
+initView(mainName);
 
 /**
  * Initialization function for the chat view.
@@ -43,6 +38,9 @@ function initView(initChatName) {
     socket.emit('tellUsername', username);
 }
 
+function setActiveWindow(chatWindow) {
+    return activeWindow = chatWindow;
+}
 
 /**
  * Adds clickListener to user list to append a new chat window on click
@@ -73,9 +71,14 @@ formChat.addEventListener('submit', function (event) {
         // Emit message to server
         console.log("Active Window id: " + activeWindow.id);
         if(activeWindow === mainWindow) {
+            console.log("public message");
             socket.emit('chat message', inputChat.value);
-        } else {
+        } else if(ulUserContains(activeWindow.id)) {
+            console.log("private message");
             socket.emit('private message', {message: inputChat.value, from: getUserFromUsername(username), to: getUserFromUsername(activeWindow.id)})
+        } else {
+            console.log(activeWindow.id);
+            socket.emit('group message', {message: inputChat.value, groupName: activeWindow.id})
         }
         // Reset input value
         inputChat.value = '';
@@ -145,6 +148,21 @@ socket.on('private message', function (data) {
     let fromWindow = appendWindowToChatRoom(fromName);
     addRoom(fromName);
     appendMsg(data.message, fromWindow);
+});
+
+socket.on('group message', function(data) {
+    console.log('group message data: ' + data);
+    let groupName = data.groupName;
+    let groupWindow = appendWindowToChatRoom(groupName);
+    addRoom(groupName);
+    appendMsg(data.message, groupWindow);
+});
+
+socket.on('group invite', function (groupName) {
+    console.log(groupName);
+    socket.emit('group invite', groupName);
+    appendWindowToChatRoom(groupName);
+    addRoom(groupName);
 });
 
 /**
@@ -247,16 +265,50 @@ function getUserFromUsername(username) {
     return users.find(user => user.username === username);
 }
 
+
+/* Modal Window */
+
+let modal = document.getElementById("modalWindow");
+let btnAddGroup = document.getElementById('btnAddGroup');
+let btnCreateGroup = document.getElementById('createGroup');
+let btnClose = document.getElementById('spanClose');
+let inputGroupName = document.getElementById('inputGroupName');
+let userSelection = document.getElementById('userSelection');
+
 btnAddGroup.onclick = function() {
+    userSelection.innerHTML = '';
+    console.log(users);
+    for(let i = 0; i < users.length; i++) {
+        let input = document.createElement("input")
+        input.id = users[i].username;
+        input.type = "checkbox";
+        input.value = users[i].username;
+        let label = document.createElement("Label");
+        label.innerText = users[i].username;
+        label.htmlFor = input.id;
+        userSelection.appendChild(input);
+        userSelection.appendChild(label);
+        userSelection.appendChild(document.createElement("br"));
+    }
     modal.style.display = "block";
 }
-
 btnClose.onclick = function() {
     modal.style.display = "none";
 }
-
 window.onclick = function(event) {
     if(event.target == modal) {
         modal.style.display ="none";
     }
+}
+
+btnCreateGroup.onclick = function() {
+    let checkedUsers = [];
+    let checkedElements = userSelection.querySelectorAll('input[type=checkbox]:checked');
+    for(let i = 0; i < checkedElements.length; i++) {
+        checkedUsers.push(getUserFromUsername(checkedElements[i].value));
+    }
+    let groupName = inputGroupName.value;
+    console.log(checkedUsers);
+    socket.emit('createGroup', {groupName: groupName, groupUser: checkedUsers});
+    modal.style.display = "none";
 }
