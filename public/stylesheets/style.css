@@ -188,6 +188,30 @@ a {
     border-color: rgba(0, 102, 255, 0.2);
 }
 
+.btnAdd {
+    margin-left: 6px;
+    background-size: 63% 63%;
+    border-radius: 100px;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.0);
+    cursor: pointer;
+    font-size: 20px;
+    border: solid;
+}
+
+.btnAdd:hover{
+    /*background-color:rgba(0, 102, 255, 0.2);*/
+    border: solid;
+    border-color: rgba(0, 102, 255, 0.2);
+}
+
+
+
+
+
 .inputChat {
     border: none;
     padding: 0 1rem;
@@ -297,7 +321,7 @@ a {
     margin-left: 0%;
     padding: 0;
     overflow-y: scroll;
-    height: 88%;
+    height: 50%;
 }
 .userList > li {
     /*background: lightgrey;*/
@@ -322,6 +346,30 @@ a {
 }
 
  */
+.groupList {
+    list-style-type: none;
+    margin-left: 0%;
+    padding: 0;
+    overflow-y: scroll;
+    height: 25%;
+}
+.groupList > li {
+    /*background: lightgrey;*/
+    width: 75%;
+    margin-left: 10%;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-top: solid lightgrey;
+    border-bottom: solid lightgrey;
+    border-left: none;
+    border-right: none;
+    border-width: thin;
+}
+
+
+
+
 
 .roomNav {
     list-style-type: none;
@@ -368,6 +416,10 @@ a {
 .helperDiv {
     max-width: 75%;
     margin-left: 10%;
+    font-family: Segoe UI, sans-serif;
+    font-size: 20px;
+    color: black;
+    text-align: center;
 }
 .chatRoom{
     height: 92%;
@@ -375,14 +427,14 @@ a {
 
 .picHolder{
     border-radius: 100%;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     border: solid #99ddff;
-    float: right;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
-    margin-top: 4.5%;
+    margin-top: 3%;
+    margin-left: 38%;
 }
 
 /*=========================Scrollbar=====================0*/
