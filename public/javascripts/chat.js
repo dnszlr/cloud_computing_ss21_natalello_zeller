@@ -9,10 +9,12 @@ let formChat = document.getElementById('formChat');
 let inputChat = document.getElementById('inputChat');
 // Chatroom in the middle
 let chatRoom = document.getElementById('chatRoom');
-// Current watched ulMessage
+// Current watched window
 let activeWindow = '';
-// Safes all windows for z-value handling
+// Safes all windows
 let windowStorage = [];
+// Main Chat Window
+let mainWindow = '';
 
 function setActiveWindow(chatWindow) {
     return activeWindow = chatWindow;
@@ -25,10 +27,12 @@ initView('Shaed');
  */
 function initView(initChatName) {
     addRoom(initChatName);
-    appendWindowToChatRoom(initChatName);
+    mainWindow = appendWindowToChatRoom(initChatName);
+    setActiveWindow(mainWindow);
+    bringUpChatWindow(mainWindow);
     // Emits username to server, initial 'say hello' from client to server.
     let username = getFromUri('username');
-    socket.emit('tellUsername', {username: username, window: activeWindow.id});
+    socket.emit('tellUsername', username);
 }
 
 
@@ -37,7 +41,9 @@ function initView(initChatName) {
  */
 ulRoomNav.addEventListener('click', function (navbarElement) {
     let navbarName = navbarElement.target.textContent;
-    appendWindowToChatRoom(navbarName);
+    let chatWindow = appendWindowToChatRoom(navbarName);
+    setActiveWindow(chatWindow);
+    bringUpChatWindow(chatWindow);
 });
 
 /**
@@ -65,8 +71,6 @@ function appendWindowToChatRoom(chatName) {
         chatWindow = createChatWindow(chatName);
     }
     chatRoom.appendChild(chatWindow);
-    bringUpChatWindow(chatWindow);
-    setActiveWindow(chatWindow);
     return chatWindow;
 }
 
@@ -105,6 +109,7 @@ formChat.addEventListener('submit', function (event) {
     event.preventDefault();
     if (inputChat.value) {
         // Emit message to server
+        console.log("Active Window id: " + activeWindow.id);
         socket.emit('chat message', {message: inputChat.value, window: activeWindow.id});
         // Reset input value
         inputChat.value = '';
@@ -124,10 +129,8 @@ socket.on('chat message', function (data) {
 /**
  * Receives all messages from server
  */
-socket.on('information', function (data) {
-    let chatWindow = appendWindowToChatRoom(data.window);
-    addRoom(data.window);
-    appendMsg(data.message, chatWindow);
+socket.on('information', function (message) {
+    appendMsg(message, mainWindow);
 });
 
 /**
@@ -173,13 +176,11 @@ function ulRoomNavContains(roomName) {
     let rooms = ulRoomNav.getElementsByTagName('li');
     let contains = false;
     for (let i = 0; i < rooms.length; i++) {
-        console.log(rooms[i]);
         if (rooms[i].textContent === roomName) {
             contains = true;
             break;
         }
     }
-    console.log(contains);
     return contains;
 }
 

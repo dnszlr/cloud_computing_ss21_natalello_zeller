@@ -19,17 +19,16 @@ getChat = function (req, res, next) {
  */
 function initSocketIo(io) {
     io.on('connection', (socket) => {
-        socket.on('tellUsername', data => {
-            addUser(socket.id, data.username);
-            console.log(data.window);
+        socket.on('tellUsername', username => {
+            addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
-            socket.emit('information', {message: formatMessage(bot, 'Welcome to Shaed ' + getCurrentUser(socket.id).username), window: data.window});
-            socket.emit('init', data.username);
+            socket.emit('information', formatMessage(bot, 'Welcome to Shaed ' + getCurrentUser(socket.id).username));
+            socket.emit('init', username);
             // Sends logged in user list to everyone in chatroom
             io.emit('updateUserList', users);
             // On connect for other users
-            socket.broadcast.emit('information', {message: formatMessage(bot, getCurrentUser(socket.id).username + ' conntected to Shaed!'), window: data.window});
+            socket.broadcast.emit('information', formatMessage(bot, getCurrentUser(socket.id).username + ' conntected to Shaed!'));
         });
         // CHAT MESSAGE
         socket.on('chat message', data => {
