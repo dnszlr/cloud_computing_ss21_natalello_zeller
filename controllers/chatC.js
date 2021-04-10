@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {addUser, removeUser, getCurrentUser, getAllUsers} = require("../services/chatService");
+const {addUser, removeUser, getUserById, getAllUsers} = require("../services/chatService");
 const bot = 'Shaed-Bot';
 
 /**
@@ -23,21 +23,27 @@ function initSocketIo(io) {
             addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
-            socket.emit('information', formatMessage(bot, 'Welcome to Shaed ' + getCurrentUser(socket.id).username));
+            socket.emit('information', formatMessage(bot, 'Welcome to Shaed ' + getUserById(socket.id).username));
             socket.emit('init', username);
             // Sends logged in user list to everyone in chatroom
             io.emit('updateUserList', users);
             // On connect for other users
-            socket.broadcast.emit('information', formatMessage(bot, getCurrentUser(socket.id).username + ' conntected to Shaed!'));
+            socket.broadcast.emit('information', formatMessage(bot, getUserById(socket.id).username + ' conntected to Shaed!'));
         });
         // CHAT MESSAGE
-        socket.on('chat message', data => {
-            io.emit('chat message', {message: formatMessage(getCurrentUser(socket.id).username, data.message), window: data.window});
+        socket.on('chat message', message => {
+            io.emit('chat message', formatMessage(getUserById(socket.id).username, message));
         });
+
+        // PRIVAT MESSAGE
+        socket.on('private message', data => {
+            socket.emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.to, to: data.from});
+            io.to(data.to.id).emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.from, to: data.to});
+        })
         // DISCONNECT
         socket.on('disconnect', async () => {
-            io.emit('information', formatMessage(bot, getCurrentUser(socket.id).username + ' disconnected from Shaed!'));
-            await removeUser(getCurrentUser(socket.id).id);
+            io.emit('information', formatMessage(bot, getUserById(socket.id).username + ' disconnected from Shaed!'));
+            await removeUser(socket.id);
             io.emit('updateUserList', getAllUsers());
         });
     });

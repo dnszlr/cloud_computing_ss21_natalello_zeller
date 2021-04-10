@@ -25,8 +25,12 @@ async function removeUser(id) {
  * @param id: the id of the searched user
  * @returns User or null
  */
-function getCurrentUser(id) {
+function getUserById(id) {
     return users.find(user => user.id === id);
+}
+
+function getByUsername(username) {
+    return users.find(user => user.username === username);
 }
 
 /**
@@ -39,6 +43,7 @@ function getAllUsers() {
 module.exports = {
     addUser,
     removeUser,
-    getCurrentUser,
+    getUserById,
+    getByUsername,
     getAllUsers
 }
