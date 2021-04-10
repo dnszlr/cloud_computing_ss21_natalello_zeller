@@ -91,8 +91,8 @@ form.form1 {
     cursor: pointer;
     border-radius: 5px;
     color: black;
-    background: #ffd1b3;
-    border: solid 1px #d4d4d4;
+    background: rgba(0, 102, 255, 0.2);
+    border: solid 1px rgba(0, 102, 255, 0.2);
     /* top right bottom left */
     padding: 10px 40px 10px 40px;
     box-shadow: 0px 0px 0px 0px black;
@@ -103,13 +103,13 @@ form.form1 {
 }
 
 .btnAuth:hover {
-    background-color: #ff6600;
+    background-color: rgba(0, 102, 255, 0.7);
     color: white;
 }
 
 .register {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #ffd1b3;
+    color: rgba(0, 102, 255, 0.2);
     font-size: 17px;
 }
 
@@ -179,7 +179,13 @@ a {
 }
 
 .btnChat:hover{
-    background:rgba(0, 102, 255, 0.2);
+    /*background-color:rgba(0, 102, 255, 0.2);*/
+    border: solid;
+    border-color: rgba(0, 102, 255, 0.2);
+}
+.btnChat:focus {
+    outline: none;
+    border-color: rgba(0, 102, 255, 0.2);
 }
 
 .inputChat {
@@ -224,11 +230,25 @@ a {
 }
 
 .messages > li {
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 0rem; */
+    padding-right: 5%;
+    padding-left: 1%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    word-break: break-all;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border: solid rgba(0, 102, 255, 0.2);
+    border-width: thin;
+    margin-bottom: 1%;
+
 }
 
 .messages > li:nth-child(odd) {
     background:rgba(0, 102, 255, 0.2);
+    word-break: break-all;
+
 }
 
 
@@ -255,27 +275,29 @@ a {
     float: left;
     max-width: 100%;
     width: 75%;
-    height: 94.5%;
+    height: 92.5%;
 }
 
 .personalInfo {
-    height: 20%;
+    height: 15%;
     /*border: solid;*/
     /*border-color: pink;*/
 }
 
 .serverInfo {
-    min-height: 20%;
+    /*min-height: 20%;*/
     /*border: solid;*/
     /*border-color: deepskyblue;*/
+    height: 84%;
+    /*border: solid;*/
 }
 
 .userList {
     list-style-type: none;
     margin-left: 0%;
     padding: 0;
-    /*overflow-y: scroll;*/
-    height: 50%;
+    overflow-y: scroll;
+    height: 88%;
 }
 .userList > li {
     /*background: lightgrey;*/
@@ -304,18 +326,26 @@ a {
 .roomNav {
     list-style-type: none;
     display: block;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    border: none ;
+    border-bottom: solid lightgrey;
 }
 
 .roomNav > li {
     display: inline;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    background:  rgba(0, 102, 255, 0.2);
+    color: black;
     margin: 0 5px 0 0;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 10px;
+    border: solid rgba(0, 102, 255, 0.2);
 }
 
 .roomNav > li:hover{
-    background:  rgba(0, 102, 255, 0.7);
+    background:  rgba(0, 102, 255, 0.2);
 }
 
 .infoText{
@@ -338,4 +368,41 @@ a {
 .helperDiv {
     max-width: 75%;
     margin-left: 10%;
+}
+.chatRoom{
+    height: 92%;
+}
+
+.picHolder{
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    border: solid #99ddff;
+    float: right;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    margin-top: 4.5%;
+}
+
+/*=========================Scrollbar=====================0*/
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    /*background: #f1f1f1;*/
+    background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
