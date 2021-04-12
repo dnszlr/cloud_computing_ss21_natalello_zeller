@@ -190,6 +190,10 @@ a {
     border-color: rgba(0, 102, 255, 0.2);
 }
 
+.inputFile {
+    display: none;
+}
+
 .btnAdd {
     margin-left: 6px;
     background-size: 63% 63%;

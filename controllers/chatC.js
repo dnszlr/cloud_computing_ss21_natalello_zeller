@@ -23,26 +23,29 @@ function initSocketIo(io) {
             addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
-            socket.emit('information', formatMessage(bot, 'Welcome to Shaed ' + getUserById(socket.id).username));
+            socket.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
             socket.emit('init', username);
             // Sends logged in user list to everyone in chatroom
             io.emit('updateUserList', users);
             // On connect for other users
-            socket.broadcast.emit('information', formatMessage(bot, getUserById(socket.id).username + ' conntected to Shaed!'));
+            socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
         });
         // CHAT MESSAGE
-        socket.on('chat message', message => {
-            io.emit('chat message', formatMessage(getUserById(socket.id).username, message));
+        socket.on('chat message', data => {
+            io.emit('chat message', {header: formatHeader(getUserById(socket.id).username), payload: data});
         });
         // PRIVAT MESSAGE
         socket.on('private message', data => {
-            socket.emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.to, to: data.from});
-            io.to(data.to.id).emit('private message', {message: formatMessage(getUserById(socket.id).username, data.message), from: data.from, to: data.to});
-        })
+            io.to(data.to.id).emit('private message', {header: formatHeader(getUserById(socket.id).username), payload: data});
+            let toSafe = data.to;
+            data.to = data.from;
+            data.from = toSafe;
+            socket.emit('private message', {header: formatHeader(getUserById(socket.id).username), payload: data});
+        });
         // GROUP MESSAGE
         socket.on('group message', data => {
-            console.log(data.groupName);
-            io.to(data.groupName).emit('group message', {message: formatMessage(getUserById(socket.id).username, data.message), groupName: data.groupName});
+            console.log(data);
+            io.to(data.groupName).emit('group message', {header: formatHeader(getUserById(socket.id).username), payload: data});
         });
 
         // JOIN GROUP
@@ -58,7 +61,7 @@ function initSocketIo(io) {
 
         // DISCONNECT
         socket.on('disconnect', async () => {
-            io.emit('information', formatMessage(bot, getUserById(socket.id).username + ' disconnected from Shaed!'));
+            io.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: ' disconnected from Shaed!', fileType: 'text'}});
             await removeUser(socket.id);
             io.emit('updateUserList', getAllUsers());
         });
@@ -71,10 +74,9 @@ function initSocketIo(io) {
  * @param message
  * @returns The compromised message
  */
-function formatMessage(username, message) {
+function formatHeader(username) {
     return {
         username,
-        message,
         time: moment().format('HH:mm:ss')
     }
 }

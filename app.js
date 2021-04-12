@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const io = require('socket.io')
 
 // express app
 const app = express();
@@ -19,11 +18,10 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 app.use(cookieParser());
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({limit: '200mb', extended: false}));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes

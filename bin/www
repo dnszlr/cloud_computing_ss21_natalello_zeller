@@ -7,12 +7,10 @@ const app = require('../app');
 const debug = require('debug')('cloud-computing-ss21-natalello-zeller:server');
 const http = require('http');
 const config = require('../config/config');
-const moment = require('moment');
 
 /**
  * Get port from environment and store in Express.
  */
-
 let port = normalizePort(process.env.PORT || config.app.port);
 app.set('port', port);
 
@@ -33,7 +31,6 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
     let port = parseInt(val, 10);
 
@@ -41,19 +38,16 @@ function normalizePort(val) {
         // named pipe
         return val;
     }
-
     if (port >= 0) {
         // port number
         return port;
     }
-
     return false;
 }
 
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
     if (error.syscall !== 'listen') {
         throw error;
@@ -81,7 +75,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
     let addr = server.address();
     let bind = typeof addr === 'string'

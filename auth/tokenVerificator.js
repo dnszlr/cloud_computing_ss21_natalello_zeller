@@ -8,7 +8,6 @@ const userService = require('../services/userService');
  * @param req
  * @param res
  * @param next
- * @returns {*}
  */
 exports.verify = function (req, res, next) {
     console.log(req.query.username);

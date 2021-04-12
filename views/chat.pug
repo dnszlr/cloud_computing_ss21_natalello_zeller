@@ -31,7 +31,8 @@ block content
             form#formChat.formChat()
                 input#inputChat.inputChat(type="text", placeholder="Enter your message")
                 button#btnChat.btnChat(style='background-image: url(/pictures/sendIcon.png);')
-                button.btnChat(style='background-image: url(/pictures/picIcon.png);')
+                input#inputFile.inputFile(type="file", accept="image/*,audio/*,video/*")
+                button#btnFile.btnChat(style='background-image: url(/pictures/picIcon.png);')
 
     script(src='/socket.io/socket.io.js')
     script(src='javascripts/chat.js')
