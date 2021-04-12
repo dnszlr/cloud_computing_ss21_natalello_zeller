@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const userService = require('../services/userService');
 
 
 /**
@@ -10,15 +11,19 @@ const config = require('../config/config');
  * @returns {*}
  */
 exports.verify = function (req, res, next) {
-    let token = req.cookies.token;
-    if (!token) {
-        return res.status(403).send({auth: false, message: 'Missing token.'});
-    }
-    jwt.verify(token, config.jwt.secret, function (err, decoded) {
-        if (err) {
-            return res.status(500).send({auth: false, message: 'Token could not get verified'});
+    console.log(req.query.username);
+    userService.getByUsername(req.query.username, async function (err, user) {
+        let token = user ? req.cookies[user.id] : undefined;
+        console.log("Im token: " + token);
+        if (!token) {
+            res.redirect('login');
         }
-        req.userId = decoded.id;
-        next();
+        jwt.verify(token, config.jwt.secret, function (err, decoded) {
+            if (err) {
+                res.redirect('login');
+            }
+            req.userId = decoded.id;
+            next();
+        });
     });
 }

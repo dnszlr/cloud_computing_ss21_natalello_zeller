@@ -20,15 +20,20 @@ getElement("btnLogin").addEventListener("click", function (event) {
  * @returns {Promise<void>}
  */
 async function login() {
-
-    let data = {username: getElement("username").value, password: getElement("password").value}
-    const response = await postRequest("/login/verification", data);
-    if (response.status == 200) {
-        window.location.href = response.location;
-    } else if(response.status == 404 || response.status == 401) {
-        getElement("lError").innerHTML = response.error;
+    let username = getElement("username").value;
+    let password = getElement("password").value;
+    if (!username || !password) {
+        getElement("lError").innerHTML = "Not all fields have a valid value!";
     } else {
-        getElement("lError").innerHTML = "Sorry, there are problems on our side.";
+        let data = {username: username, password: password};
+        const response = await postRequest("/login/verification", data);
+        if (response.status == 200) {
+            window.location.href = response.location;
+        } else if (response.status == 404 || response.status == 401) {
+            getElement("lError").innerHTML = response.error;
+        } else {
+            getElement("lError").innerHTML = "Sorry, there are problems on our side.";
+        }
     }
 }
 

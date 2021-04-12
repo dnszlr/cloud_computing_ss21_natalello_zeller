@@ -12,7 +12,7 @@ const tokenGenerator = (res, id) => {
         expiresIn: config.jwt.tokenDuration
     });
     console.log("Im tokenGenerate: " + token);
-    return res.cookie('token', token, {
+    return res.cookie(id, token, {
         expires: new Date(Date.now() + config.cookie.lifetime),
         secure: false,
         httpOnly: true

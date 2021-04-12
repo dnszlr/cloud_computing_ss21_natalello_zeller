@@ -1,4 +1,3 @@
-
 /**
  * Shortcut for document.getElementById
  * @param id searched element
@@ -15,14 +14,21 @@ getElement("btnRegister").addEventListener("click", function (event) {
 });
 
 async function register() {
-    let data = {email: getElement("email").value, username: getElement("username").value, password: getElement("password").value}
-    const response = await postRequest("/registration", data);
-    if (response.status == 200) {
-        window.location.href = response.location;
-    } else if(response.status == 500) {
-        getElement("lError").innerHTML = response.error;
+    let email = getElement("email").value;
+    let username = getElement("username").value;
+    let password = getElement("password").value;
+    let data = {email: email, username: username, password: password};
+    if (!email || !username || !password) {
+        getElement("lError").innerHTML = "Not all fields have a valid value!";
     } else {
-        getElement("lError").innerHTML = "Sorry, there are problems on our side.";
+        const response = await postRequest("/registration", data);
+        if (response.status == 200) {
+            window.location.href = response.location;
+        } else if (response.status == 500) {
+            getElement("lError").innerHTML = response.error.data;
+        } else {
+            getElement("lError").innerHTML = "Sorry, there are problems on our side.";
+        }
     }
 }
 
