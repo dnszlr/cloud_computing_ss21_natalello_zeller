@@ -202,10 +202,13 @@ a {
     cursor: pointer;
     font-size: 20px;
     border: solid;
+    outline: none;
+    margin-top: 4px;
+    border-color: rgba(0, 102, 255, 0.2);
 }
 
 .btnAdd:hover {
-    /*background-color:rgba(0, 102, 255, 0.2);*/
+    background-color:rgba(0, 102, 255, 0.2);
     border: solid;
     border-color: rgba(0, 102, 255, 0.2);
 }
@@ -413,6 +416,7 @@ a {
     background-position: center;
     background-size: 100% 100%;
     margin-top: 4.5%;
+    margin-left: 38%;
 }
 
 
@@ -487,4 +491,29 @@ a {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+/*Group Name Input field*/
+.inputGroup {
+    font-family: Segoe UI, sans-serif;
+    font-size: 20px;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    border-bottom : solid lightgrey;
+    text-align: center;
+    height: 45px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+}
+
+.inputGroup:hover {
+    border-color: rgba(0, 102, 255, 0.2);
+}
+
+.inputGroup:focus {
+    outline: none;
+    border-color: rgba(0, 102, 255, 0.2);
 }
