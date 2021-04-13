@@ -16,13 +16,14 @@ exports.verify = function (req, res, next) {
         console.log("Im token: " + token);
         if (!token) {
             res.redirect('login');
+        } else {
+            jwt.verify(token, config.jwt.secret, function (err, decoded) {
+                if (err) {
+                    res.redirect('login');
+                }
+                req.userId = decoded.id;
+                next();
+            });
         }
-        jwt.verify(token, config.jwt.secret, function (err, decoded) {
-            if (err) {
-                res.redirect('login');
-            }
-            req.userId = decoded.id;
-            next();
-        });
     });
 }
