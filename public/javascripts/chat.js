@@ -48,7 +48,17 @@ ulRoomNav.addEventListener('click', function (navbarElement) {
     let chatWindow = appendWindowToChatRoom(roomName);
     setActiveWindow(chatWindow);
     bringUpChatWindow(chatWindow);
+    highlightSelection(roomName);
 });
+
+function highlightSelection(roomName) {
+    let liList = ulRoomNav.getElementsByTagName('li');
+    console.log(liList);
+    for(let li in liList) {
+        console.log(liList[li].id +  ' | ' + roomName);
+        liList[li].id === roomName ? liList[li].className = 'roomNavLiSelected' : liList[li].className = 'roomNavLi'
+    }
+}
 
 /**
  * Adds clickListener to user list to append a new chat window on click
@@ -140,6 +150,8 @@ function createChatWindow(chatName) {
 function addRoom(roomName) {
     if (!ulRoomNavContains(roomName)) {
         let item = document.createElement('li');
+        item.id = roomName;
+        item.className = 'roomNavLi';
         item.textContent = roomName;
         ulRoomNav.appendChild(item);
     }

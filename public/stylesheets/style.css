@@ -338,12 +338,13 @@ a {
 .userList > li {
     /*background: lightgrey;*/
     width: 75%;
-    margin-left: 10%;
+    margin-left: 12%;
     text-align: center;
     cursor: pointer;
     margin-bottom: 5px;
     border: none;
-
+    font-family: Segoe UI, sans-serif;
+    font-size: 20px;
 }
 
 .userList > li::after {
@@ -365,7 +366,7 @@ a {
     border-bottom: solid lightgrey;
 }
 
-.roomNav > li {
+.roomNavLi {
     display: inline;
     padding: 0.5rem 2.5rem;
     cursor: pointer;
@@ -374,6 +375,19 @@ a {
     border-bottom-right-radius: 20px;
     border-top-left-radius: 20px;
     border-top-right-radius: 10px;
+    border: solid rgba(0, 102, 255, 0.2);
+}
+
+.roomNavLiSelected {
+    display: inline;
+    padding: 0.5rem 2.5rem;
+    cursor: pointer;
+    color: black;
+    margin: 0 5px 0 0;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 10px;
+    background: rgba(0, 102, 255, 0.2);
     border: solid rgba(0, 102, 255, 0.2);
 }
 
