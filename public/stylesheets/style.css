@@ -8,6 +8,7 @@ body {
     font-family: Segoe UI, sans-serif;
     height: 98%;
     width: 99%;
+    overflow: hidden;
 }
 
 .main {
@@ -335,24 +336,19 @@ a {
     text-align: center;
     cursor: pointer;
     margin-bottom: 5px;
-    border-top: solid lightgrey;
-    border-bottom: solid lightgrey;
-    border-left: none;
-    border-right: none;
-    border-width: thin;
+    border: none;
+
 }
 
-/*
-.userList > li:nth-child(odd) {
-    background: white;
-    text-align: center;
-    width: 75%;
-    margin-left: 10%;
-    cursor: pointer;
+.userList > li::after {
+    content: "\2022";
+    color: limegreen;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: 0em;
+    font-size: 20px;
 }
-
- */
-
 
 .roomNav {
     list-style-type: none;
