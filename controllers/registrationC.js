@@ -1,6 +1,5 @@
 const userService = require("../services/userService");
-const authBundle = require("../auth/authBundle");
-const config = require('../config/config');
+const encryptionHelper = require("../auth/encryptionHelper");
 const tokenGenerator = require("../auth/tokenGenerator");
 
 /**
@@ -24,9 +23,7 @@ register = async function (req, res) {
     if (!(body.username && body.password)) {
         return res.send({status: 400, error: "Incoming data invalid"});
     }
-    const encryptionParam = authBundle.getEncryptionParam();
-    const salt = await authBundle.getBcrypt().genSalt(encryptionParam);
-    body.password = await authBundle.getBcrypt().hash(body.password, salt);
+    body.password = await encryptionHelper.encrypt(body.password);
     await userService.add(body, async function (err, user) {
         if (user) {
             await tokenGenerator(res, user.id);

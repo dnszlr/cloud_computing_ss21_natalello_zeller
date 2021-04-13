@@ -1,5 +1,5 @@
 const userService = require("../services/userService");
-const authBundle = require("../auth/authBundle");
+const encryptionHelper = require("../auth/encryptionHelper");
 const tokenGenerator = require('../auth/tokenGenerator')
 /**
  * Sends via response the new rendered login page
@@ -24,7 +24,7 @@ verification = async function (req, res) {
             return res.send({status: 500, error: 'Server Error'});
         }
         if (user) {
-            const isPWValid = await authBundle.getBcrypt().compare(body.password, user.password);
+            const isPWValid = await encryptionHelper.verify(body.password, user.password);
             if (isPWValid) {
                 await tokenGenerator(res, user.id);
                 res.send({status: 200, auth: true, location: '/chat?username=' + user.username});

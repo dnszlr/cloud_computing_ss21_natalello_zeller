@@ -32,5 +32,8 @@ const chatRouter = require('./routes/chatR');
 app.use('/login', loginRouter);
 app.use('/registration', registrationRouter);
 app.use('/chat', chatRouter);
+app.use((req, res, next) => {
+   res.render('error');
+});
 
 module.exports = app;

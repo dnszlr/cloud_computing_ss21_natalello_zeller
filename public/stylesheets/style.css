@@ -125,6 +125,12 @@ a {
     width: 175px;
 }
 
+.imgError {
+    height: 100%;
+    width: 100%;
+}
+
+
 .imgbox {
     max-height: 35%;
     max-width: 100%;
