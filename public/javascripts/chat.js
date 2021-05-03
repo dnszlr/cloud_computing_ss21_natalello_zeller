@@ -437,5 +437,4 @@ btnCreateGroup.onclick = function () {
         socket.emit('createGroup', {groupName: groupName, groupUser: checkedUsers});
         modal.style.display = "none";
     }
-
 }
