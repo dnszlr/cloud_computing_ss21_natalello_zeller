@@ -189,6 +189,11 @@ socket.on('group invite', function (groupName) {
     addRoom(groupName);
 });
 
+socket.on('profilePicture', function(data){
+    console.log(data);
+    document.getElementById('btnProfilePicture').style.backgroundImage = data;
+});
+
 /**
  * Receives all messages from server
  */

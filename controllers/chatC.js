@@ -1,5 +1,6 @@
 const moment = require('moment');
 const {addUser, removeUser, getUserById, getByUsername, getAllUsers} = require("../services/chatService");
+const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
 
 /**
@@ -19,13 +20,20 @@ getChat = function (req, res, next) {
  */
 function initSocketIo(io) {
     io.on('connection', (socket) => {
-        socket.on('tellUsername', username => {
+        socket.on('tellUsername', async username => {
             addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
             socket.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
             socket.emit('init', username);
             // Sends logged in user list to everyone in chatroom
+            let storedUser = undefined;
+            await userService.getByUsername(username, async function(err, user) {
+                storedUser=  user;
+            });
+            console.log("img: " + storedUser.img);
+            socket.emit('profilePicture', storedUser.img);
+
             io.emit('updateUserList', users);
             // On connect for other users
             socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});

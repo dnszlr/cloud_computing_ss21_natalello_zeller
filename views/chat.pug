@@ -9,8 +9,9 @@ block content
                     div.deco()
                     div.helperDiv()
                         a#aUsername.infoText()
-                    div.helperDiv()
-                        div.picHolder(style='background-image: url(/pictures/userIcon.png);')
+                    div.picWrapper
+                        input#inputProfilePicture.inputFile(type="file", accept="image/*")
+                        button#btnProfilePicture.btnProfilePicture(style='background-image: url(/pictures/userIcon.png);')
                 div.serverInfo()
                     div.deco()
                     div.helperDiv() Active User
@@ -33,7 +34,6 @@ block content
                 button#btnChat.btnChat(style='background-image: url(/pictures/sendIcon.png);')
                 input#inputFile.inputFile(type="file", accept="image/*,audio/*,video/*")
                 button#btnFile.btnChat(style='background-image: url(/pictures/picIcon.png);')
-
     script(src='/socket.io/socket.io.js')
     script(src='javascripts/chat.js')
 

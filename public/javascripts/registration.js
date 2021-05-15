@@ -1,3 +1,6 @@
+let btnProfilePicture = document.getElementById('btnProfilePicture');
+let inputProfilePicture = document.getElementById('inputProfilePicture');
+
 /**
  * Shortcut for document.getElementById
  * @param id searched element
@@ -17,7 +20,9 @@ async function register() {
     let email = getElement("email").value;
     let username = getElement("username").value;
     let password = getElement("password").value;
-    let data = {email: email, username: username, password: password};
+    let profilePicture = btnProfilePicture.style.backgroundImage;
+    let data = {email: email, username: username, password: password, img: profilePicture};
+    console.log(data);
     if (!email || !username || !password) {
         getElement("lError").innerHTML = "Not all fields have a valid value!";
     } else {
@@ -43,3 +48,27 @@ async function postRequest(url, data) {
     });
     return response.json();
 }
+
+btnProfilePicture.addEventListener('click', function (event) {
+    event.preventDefault();
+    inputProfilePicture.click();
+});
+
+inputProfilePicture.addEventListener('change', async function (event) {
+    event.preventDefault();
+    const imageList = event.target.files;
+    let profilePicture = imageList[0];
+    console.log(profilePicture);
+    if (profilePicture.size > 16777216) {
+        alert("Files with only less than 16mb are allowed!");
+    } else {
+        let reader = new FileReader();
+        reader.onloadend = function() {
+            btnProfilePicture.style.backgroundImage = 'url(' + reader.result + ')';
+        }
+        if(profilePicture){
+            reader.readAsDataURL(profilePicture);
+        }
+
+    }
+});
