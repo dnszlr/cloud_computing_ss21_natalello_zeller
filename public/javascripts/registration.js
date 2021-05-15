@@ -20,7 +20,7 @@ async function register() {
     let email = getElement("email").value;
     let username = getElement("username").value;
     let password = getElement("password").value;
-    let profilePicture = btnProfilePicture.style.backgroundImage;
+    let profilePicture = btnProfilePicture.style.backgroundImage.replace('url(','').replace(')','').replace(/\"/gi, "");;
     let data = {email: email, username: username, password: password, img: profilePicture};
     console.log(data);
     if (!email || !username || !password) {
@@ -69,6 +69,5 @@ inputProfilePicture.addEventListener('change', async function (event) {
         if(profilePicture){
             reader.readAsDataURL(profilePicture);
         }
-
     }
 });
