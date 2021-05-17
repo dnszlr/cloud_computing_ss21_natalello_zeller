@@ -7,8 +7,6 @@ const app = require('../app');
 const debug = require('debug')('cloud-computing-ss21-natalello-zeller:server');
 const http = require('http');
 const config = require('../config/config');
-const helmet = require("helmet");
-app.use(helmet());
 
 /**
  * Get port from environment and store in Express.
