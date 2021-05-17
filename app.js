@@ -22,6 +22,19 @@ app.use(hsts({
    maxAge: 15552000
 }))
 
+//more security headers collected behind this npm package
+let helmet = require('helmet');
+app.use(helmet());
+
+// A simple module to generate SRI hashes out of files and implement sub-resource integrity.
+let sri = require('node-sri')
+sri.hash('package.json', function(_err, hash){
+   console.log('package.json\'s hash is', hash)
+})
+sri.hash('index.js', function(_err, hash){
+   console.log('index.js\'s hash is', hash)
+})
+
 // implement the X-XSS-Protection header
 // and force the header to be set to 1; mode = block
 app.use((_req, res, next) => {
