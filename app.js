@@ -19,6 +19,8 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 let helmet = require('helmet');
 app.use(helmet());
 
+app.disable('x-powered-by');
+
 // ------------- Security End ----------------
 
 
