@@ -17,17 +17,6 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 
 // ---------- Security ----------------
 
-// implement the X-XSS-Protection header
-// and force the header to be set to 1; mode = block
-app.use((_req, res, next) => {
-   res.setHeader("X-XSS-Protection", "1; mode=block");
-   next();
-});
-
-// implement the X-Frame-Options (XFO) header
-let xFrameOptions = require('x-frame-options');
-const { compile } = require('ejs');
-app.use(xFrameOptions());
 
 // ------------- Security End ----------------
 
