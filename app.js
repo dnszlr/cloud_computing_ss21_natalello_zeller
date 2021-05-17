@@ -15,13 +15,17 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => console.log('connected to ccShaedDB'))
     .catch((err) => console.log(err));
 
+const hsts = require('hsts')
+app.use(hsts({
+   maxAge: 15552000
+}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(cookieParser());
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({limit: '200mb', extended: false}));
+app.use(express.json({limit: '50mb', extended: true}));
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes

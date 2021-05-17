@@ -1,6 +1,7 @@
 const userService = require("../services/userService");
 const encryptionHelper = require("../auth/encryptionHelper");
 const tokenGenerator = require("../auth/tokenGenerator");
+const visualRecognition = require("../ibmServices/visualRecognition")
 
 /**
  * Sends via response the new rendered registration page

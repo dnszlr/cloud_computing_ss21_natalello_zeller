@@ -20,7 +20,7 @@ async function register() {
     let email = getElement("email").value;
     let username = getElement("username").value;
     let password = getElement("password").value;
-    let profilePicture = btnProfilePicture.style.backgroundImage.replace('url(','').replace(')','').replace(/\"/gi, "");;
+    let profilePicture = btnProfilePicture.style.backgroundImage.replace('url(','').replace(')','').replace(/\"/gi, "");
     let data = {email: email, username: username, password: password, img: profilePicture};
     console.log(data);
     if (!email || !username || !password) {
@@ -49,6 +49,17 @@ async function postRequest(url, data) {
     return response.json();
 }
 
+async function postImageRequest(url, image) {
+    console.log(image);
+    const formData = new FormData();
+    formData.append('image', image);
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
+    return response;
+}
+
 btnProfilePicture.addEventListener('click', function (event) {
     event.preventDefault();
     inputProfilePicture.click();
@@ -58,16 +69,23 @@ inputProfilePicture.addEventListener('change', async function (event) {
     event.preventDefault();
     const imageList = event.target.files;
     let profilePicture = imageList[0];
-    console.log(profilePicture);
-    if (profilePicture.size > 16777216) {
-        alert("Files with only less than 16mb are allowed!");
+    let response = await postImageRequest('/registration/visualRecognition', profilePicture);
+    if(response.status == 200) {
+        // only images with less than 10mb allowed
+        if (profilePicture.size > 10485760) {
+            alert("Files with only less than 16mb are allowed!");
+        } else {
+            let reader = new FileReader();
+            reader.onloadend = function() {
+                btnProfilePicture.style.backgroundImage = 'url(' + reader.result + ')';
+            }
+            if(profilePicture){
+                reader.readAsDataURL(profilePicture);
+            }
+        }
+    } else if(response.status == 403) {
+        alert("The selected image doesn't show a human face. Please try again!");
     } else {
-        let reader = new FileReader();
-        reader.onloadend = function() {
-            btnProfilePicture.style.backgroundImage = 'url(' + reader.result + ')';
-        }
-        if(profilePicture){
-            reader.readAsDataURL(profilePicture);
-        }
+        getElement("lError").innerHTML = "Sorry there is a problem on our side";
     }
 });
