@@ -4,8 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const helmet = require('helmet');
-
 
 // express app
 const app = express();
@@ -29,7 +27,6 @@ app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 //---------------- SECURITY ---------------
-app.use(helmet());
 
 //---------------- SECURITY END ---------------
 

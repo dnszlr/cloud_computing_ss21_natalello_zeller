@@ -1,5 +1,5 @@
 ---
 applications:
   - name: shaed
-    memory: 800M
+    memory: 512M
     instances: 1
