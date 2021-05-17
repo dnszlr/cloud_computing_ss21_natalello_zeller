@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const helmet = require("helmet");
+const helmet = require('helmet');
 
 // express app
 const app = express();
@@ -34,6 +34,17 @@ app.use(helmet());
 app.use((_req, res, next) => {
    res.setHeader("X-XSS-Protection", "1; mode=block");
    next();
+});
+
+app.enable('trust proxy');
+app.use(function(req,res, next) {
+   let host = req.headers.host;
+   console.log(req.headers);
+   if(!(host.includes('localhost') || req.protocol === 'https')) {
+      res.redirect('https://' + req.headers.host + req.url);
+   } else {
+      next()
+   }
 });
 //---------------- SECURITY END ---------------
 
