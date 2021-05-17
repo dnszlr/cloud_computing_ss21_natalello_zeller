@@ -15,10 +15,28 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => console.log('connected to ccShaedDB'))
     .catch((err) => console.log(err));
 
+// ---------- Security ----------------
+
 const hsts = require('hsts')
 app.use(hsts({
    maxAge: 15552000
 }))
+
+// implement the X-XSS-Protection header
+// and force the header to be set to 1; mode = block
+app.use((_req, res, next) => {
+   res.setHeader("X-XSS-Protection", "1; mode=block");
+   next();
+});
+
+// implement the X-Frame-Options (XFO) header
+let xFrameOptions = require('x-frame-options');
+const { compile } = require('ejs');
+app.use(xFrameOptions());
+
+// ------------- Security End ----------------
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
