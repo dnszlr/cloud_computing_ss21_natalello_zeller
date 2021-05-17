@@ -16,7 +16,8 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
     .catch((err) => console.log(err));
 
 // ---------- Security ----------------
-
+let helmet = require('helmet');
+app.use(helmet());
 
 // ------------- Security End ----------------
 
