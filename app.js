@@ -28,20 +28,7 @@ app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 //---------------- SECURITY ---------------
-app.use(helmet({
-   contentSecurityPolicy: {
-      directives: {
-         defaultSrc: ["'self"],
-         styleSrc: ["'self"],
-         scriptSrc: ["'self"],
-         reportUri: '/report-violation',
-         objectSrc: ["'self"],
-         upgradeInsecureRequests:true,
-      },
-   },
-   referrerPolicy: {policy: 'same-origin'},
-   featurePolicy: {},
-}));
+app.use(helmet());
 //---------------- SECURITY END ---------------
 
 // Routes
