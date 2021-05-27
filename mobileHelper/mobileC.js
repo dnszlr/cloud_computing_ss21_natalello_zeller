@@ -17,7 +17,11 @@ paymentMethod = async function (req, res) {
             submitForSettlement: true
         }
     }, (err, result) => {
-        res.send(result);
+        if (result) {
+            res.send(result);
+        } else {
+            res.status(500).send(err);
+        }
     });
 }
 
