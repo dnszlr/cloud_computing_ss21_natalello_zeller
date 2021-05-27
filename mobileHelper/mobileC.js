@@ -34,12 +34,35 @@ getClientToken = async function (req, res) {
         customerId: customerId
     }, (err, response) => {
         // pass clientToken to your front-end
-        const clientToken = response.clientToken;
-        res.send(clientToken);
+        if (response) {
+            const clientToken = response.clientToken;
+            res.send(clientToken);
+        } else {
+            res.status(500).send(err);
+        }
     });
+}
+
+createUser = async function (req, res) {
+    let id = req.query.id;
+    let email = req.query.email;
+    let customer = gateway.customer.search(id);
+    if (!customer) {
+        gateway.customer.create({
+            id: id,
+            email: email
+        }), (err, result) => {
+            if (result) {
+                res.send(result);
+            } else {
+                res.status(500).send(err);
+            }
+        }
+    }
 }
 
 module.exports = {
     paymentMethod,
-    getClientToken
+    getClientToken,
+    createUser
 }
