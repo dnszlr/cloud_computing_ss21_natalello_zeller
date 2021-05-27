@@ -48,23 +48,18 @@ createUser = async function (req, res) {
     let email = req.query.email;
     console.log("id: " + id);
     console.log("email:" + email);
-    let customer = gateway.customer.find(id);
-    if (customer) {
-        res.send(customer.id);
-    } else {
-        gateway.customer.create({
-            id: id,
-            email: email
-        }, (err, result) => {
-            if (result) {
-                console.log(result);
-                res.send(result.customer.id);
-            } else {
-                console.log("error");
-                res.status(500).send(err);
-            }
-        });
-    }
+    gateway.customer.create({
+        id: id,
+        email: email
+    }, (err, result) => {
+        if (result) {
+            console.log(result);
+            res.send(result.customer.id);
+        } else {
+            console.log("error");
+            res.status(500).send(err);
+        }
+    });
 }
 
 module.exports = {
