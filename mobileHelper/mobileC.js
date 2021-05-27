@@ -11,7 +11,7 @@ paymentMethod = async function (req, res) {
     const nonceFromTheClient = req.body.payment_method_nonce;
     const amount = req.body.amount;
     gateway.transaction.sale({
-        amount: '10.00',
+        amount: amount,
         paymentMethodNonce: nonceFromTheClient,
         options: {
             submitForSettlement: true
