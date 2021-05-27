@@ -4,7 +4,7 @@ const router = express.Router();
 let controller = require('./mobileC');
 
 router.post('/checkout', controller.paymentMethod);
-router.post('createuser', controller.createUser);
+router.get('createuser', controller.createUser);
 router.get('/clienttoken', controller.getClientToken);
 
 module.exports = router;
