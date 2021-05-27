@@ -44,6 +44,7 @@ getClientToken = async function (req, res) {
 }
 
 createUser = async function (req, res) {
+    console.log(req.query);
     let id = req.query.id;
     let email = req.query.email;
     console.log("id: " + id);
