@@ -46,6 +46,8 @@ getClientToken = async function (req, res) {
 createUser = async function (req, res) {
     let id = req.query.id;
     let email = req.query.email;
+    console.log("id: " + id);
+    console.log("email:" + email);
     let customer = gateway.customer.find(id);
     if (customer) {
         res.send(customer.id);
@@ -55,8 +57,10 @@ createUser = async function (req, res) {
             email: email
         }, (err, result) => {
             if (result) {
+                console.log(result);
                 res.send(result.customer.id);
             } else {
+                console.log("error");
                 res.status(500).send(err);
             }
         });
