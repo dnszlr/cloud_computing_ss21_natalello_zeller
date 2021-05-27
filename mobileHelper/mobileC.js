@@ -18,6 +18,8 @@ paymentMethod = async function (req, res) {
         }
     }, (err, result) => {
         if (result) {
+            console.log("result incoming");
+            console.log(result);
             res.send(result);
         } else {
             res.status(500).send(err);
