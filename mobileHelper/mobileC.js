@@ -28,7 +28,7 @@ paymentMethod = async function (req, res) {
 }
 
 getClientToken = async function (req, res) {
-    let customerId = req.body.customerId;
+    let customerId = req.query.id
     console.log("customerId:" + customerId);
     gateway.clientToken.generate({
         customerId: customerId
