@@ -51,7 +51,7 @@ createUser = async function (req, res) {
     console.log("email:" + email);
     gateway.customer.create({
         id: id,
-        email: email
+        firstName: email
     }, (err, result) => {
         if (result) {
             console.log(result);
