@@ -52,12 +52,12 @@ app.use(function(req,res, next) {
 const loginRouter = require('./routes/loginR');
 const registrationRouter = require('./routes/registrationR');
 const chatRouter = require('./routes/chatR');
-const checkoutRouter = require('./mobileHelper/checkoutR');
+const mobileRouter = require('./mobileHelper/mobileR');
 // Route usage
 app.use('/login', loginRouter);
 app.use('/registration', registrationRouter);
 app.use('/chat', chatRouter);
-app.use('/checkout', checkoutRouter);
+app.use('/mobile', mobileRouter);
 app.use((req, res, next) => {
    res.render('error');
 });

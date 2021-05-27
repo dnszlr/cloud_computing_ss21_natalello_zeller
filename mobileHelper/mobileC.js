@@ -21,6 +21,17 @@ paymentMethod = async function (req, res) {
     });
 }
 
+getClientToken = async function (req, res) {
+    let customerId = req.body.customerId;
+    gateway.clientToken.generate({
+        customerId: customerId
+    }, (err, response) => {
+        // pass clientToken to your front-end
+        const clientToken = response.clientToken;
+        res.send(clientToken);
+    });
+}
+
 module.exports = {
     paymentMethod
 }
