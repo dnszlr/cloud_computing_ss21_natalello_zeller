@@ -33,5 +33,6 @@ getClientToken = async function (req, res) {
 }
 
 module.exports = {
-    paymentMethod
+    paymentMethod,
+    getClientToken
 }
