@@ -41,7 +41,7 @@ refundPayment = async function (req, res) {
     let amount = req.body.amount;
     let customerId = req.body.customerId;
     let result = gateway.transaction.refund("transactionId");
-    res.send(result.success());
+    res.send(result.success);
 }
 
 getClientToken = async function (req, res) {
