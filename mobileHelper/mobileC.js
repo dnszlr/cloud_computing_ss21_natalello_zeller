@@ -28,9 +28,9 @@ receivePayment = async function (req, res) {
 }
 
 sendPayment = async function (req, res) {
-    let amount = req.body.amount;
-    let transactionId = req.body.transactionId;
-    let supplierId = req.body.supplierId;
+    let amount = req.query.amount;
+    let transactionId = req.query.transactionId;
+    let supplierId = req.query.supplierId;
     console.log("Received amount:" + amount);
     console.log("Received transaction ID:" + transactionId);
     console.log("Received supplier ID:" + supplierId);
