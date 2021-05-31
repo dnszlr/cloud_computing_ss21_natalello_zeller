@@ -7,7 +7,7 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: 'e14f1a79764a021fe1b2ed134134852c'
 });
 
-paymentMethod = async function (req, res) {
+receivePayment = async function (req, res) {
     const nonceFromTheClient = req.body.payment_method_nonce;
     const amount = req.body.amount;
     gateway.transaction.sale({
@@ -25,6 +25,23 @@ paymentMethod = async function (req, res) {
             res.status(500).send(err);
         }
     });
+}
+
+sendPayment = async function (req, res) {
+    let amount = req.body.amount;
+    let transactionId = req.body.transactionId;
+    let supplierId = req.body.supplierId;
+    console.log("Received amount:" + amount);
+    console.log("Received transaction ID:" + transactionId);
+    console.log("Received supplier ID:" + supplierId);
+}
+
+refundPayment = async function (req, res) {
+    let transactionId = req.body.transactionId;
+    let amount = req.body.amount;
+    let customerId = req.body.customerId;
+    let result = gateway.transaction.refund("transactionId");
+    res.send(result.success());
 }
 
 getClientToken = async function (req, res) {
@@ -63,8 +80,11 @@ createUser = async function (req, res) {
     });
 }
 
+
 module.exports = {
-    paymentMethod,
+    receivePayment,
+    sendPayment,
+    refundPayment,
     getClientToken,
     createUser
 }
