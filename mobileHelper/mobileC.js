@@ -1,5 +1,4 @@
 const braintree = require("braintree");
-const landingPage = require("../mobileHelper/stylesheet.css")
 
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Sandbox,
