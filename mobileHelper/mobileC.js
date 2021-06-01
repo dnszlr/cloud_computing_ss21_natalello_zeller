@@ -85,11 +85,16 @@ createUser = async function (req, res) {
     });
 }
 
+getLandingPage = function (req, res, next) {
+    res.render('landingPage', {title: 'LandingPage'});
+}
+
 
 module.exports = {
     receivePayment,
     sendPayment,
     refundPayment,
     getClientToken,
-    createUser
+    createUser,
+    getLandingPage
 }
