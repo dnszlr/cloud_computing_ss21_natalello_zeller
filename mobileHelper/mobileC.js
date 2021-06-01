@@ -34,6 +34,11 @@ sendPayment = async function (req, res) {
     console.log("Received amount:" + amount);
     console.log("Received transaction ID:" + transactionId);
     console.log("Received supplier ID:" + supplierId);
+    if(amount && transactionId && supplierId) {
+        res.send({status: 200, message: "Transaktion erfolgreich"});
+    } else {
+        res.send({status: 404, message: "Transaktion fehlgeschlagen"});
+    }
 }
 
 refundPayment = async function (req, res) {
