@@ -44,7 +44,8 @@ app.use(function (req, res, next) {
         next()
     }
 });
-app.use(function (req, res, next) {
+/**
+ app.use(function (req, res, next) {
     res.setHeader("Content-Security-Policy",
         "default-src 'none';" +
         "base-uri 'self';" +
@@ -59,6 +60,7 @@ app.use(function (req, res, next) {
         "upgrade-insecure-requests");
     return next();
 });
+ **/
 //---------------- SECURITY END ---------------
 
 // Routes
