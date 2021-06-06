@@ -56,7 +56,9 @@ app.use(function (req, res, next) {
         "script-src 'self';" +
         "script-src-attr 'none';" +
         "style-src 'self';" +
-        "upgrade-insecure-requests");
+        "upgrade-insecure-requests;" +
+        "connect-src 'self'"
+    );
     return next();
 });
 //---------------- SECURITY END ---------------
