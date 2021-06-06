@@ -45,7 +45,18 @@ app.use(function (req, res, next) {
     }
 });
 app.use(function (req, res, next) {
-    res.setHeader("Content-Security-Policy", "style-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'self'");
+    res.setHeader("Content-Security-Policy",
+        "default-src 'none';" +
+        "base-uri 'self';" +
+        "block-all-mixed-content;" +
+        "font-src 'self' https: data:;" +
+        "frame-ancestors 'self';" +
+        "img-src 'self' data:;" +
+        "object-src 'none';" +
+        "script-src 'self';" +
+        "script-src-attr 'none';" +
+        "style-src 'self' https: 'unsafe-inline';" +
+        "upgrade-insecure-requests");
     return next();
 });
 //---------------- SECURITY END ---------------
