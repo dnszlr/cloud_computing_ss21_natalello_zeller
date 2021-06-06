@@ -11,7 +11,7 @@ block content
                         a#aUsername.infoText()
                     div.picWrapper
                         input#inputProfilePicture.inputFile(type="file", accept="image/*")
-                        button#btnProfilePicture.btnProfilePicture(style='background-image: url(/pictures/userIcon.png);')
+                        button#btnProfilePicture.btnProfilePicture()
                 div.serverInfo()
                     div.deco()
                     div.helperDiv() Active User
@@ -31,9 +31,9 @@ block content
             div#chatRoom.chatRoom()
             form#formChat.formChat()
                 input#inputChat.inputChat(type="text", placeholder="Enter your message")
-                button#btnChat.btnChat(style='background-image: url(/pictures/sendIcon.png);')
+                button#btnChat.btnChat()
                 input#inputFile.inputFile(type="file", accept="image/*,audio/*,video/*")
-                button#btnFile.btnChat(style='background-image: url(/pictures/picIcon.png);')
+                button#btnFile.btnFile()
     script(src='/socket.io/socket.io.js')
     script(src='javascripts/chat.js')
 

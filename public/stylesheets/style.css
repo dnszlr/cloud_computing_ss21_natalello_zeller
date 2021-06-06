@@ -159,8 +159,6 @@ a {
 
 
 .formChat {
-    /*background: rgba(0, 0, 0, 0.15);*/
-    /*background-image: linear-gradient(to right, #ffd1b3 , lightgrey);*/
     padding: 0.25rem;
     position: fixed;
     bottom: 3%;
@@ -169,20 +167,8 @@ a {
     display: flex;
     height: 4rem;
     box-sizing: border-box;
-    /*backdrop-filter: blur(10px);*/
 }
 
-/*
-.formChat > button {
-    background: #333;
-    border: none;
-    padding: 0 1rem;
-    margin: 0.25rem;
-    border-radius: 3px;
-    outline: none;
-    color: #fff;
-}
-*/
 .btnChat {
     margin-left: 6px;
     width: 58px;
@@ -195,6 +181,7 @@ a {
     background-position: center;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.0);
     cursor: pointer;
+    background-image: url("/pictures/sendIcon.png");
 }
 
 .btnChat:hover {
@@ -207,6 +194,35 @@ a {
     outline: none;
     border-color: rgba(0, 102, 255, 0.2);
 }
+
+.btnFile {
+    margin-left: 6px;
+    width: 58px;
+    height: 58px;
+    background-size: 63% 63%;
+    border-radius: 100%;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.0);
+    cursor: pointer;
+    background-image: url("/pictures/picIcon.png");
+}
+
+.btnFile:hover {
+    /*background-color:rgba(0, 102, 255, 0.2);*/
+    border: solid;
+    border-color: rgba(0, 102, 255, 0.2);
+}
+
+.btnFile:focus {
+    outline: none;
+    border-color: rgba(0, 102, 255, 0.2);
+}
+
+
+
 
 .inputFile {
     display: none;
@@ -303,14 +319,12 @@ a {
 
 .wrapper {
     width: 100%;
-    /*border: 1px solid black;*/
     overflow: hidden; /* add this to contain floated children */
     height: 98%;
 }
 
 .first {
     width: 24.89%;
-    /*border: 1px solid red;*/
     max-width: 100%;
     float: left;
     height: 100%;
@@ -326,8 +340,6 @@ a {
 
 .personalInfo {
     height: 15%;
-    /*border: solid;*/
-    /*border-color: pink;*/
 }
 
 .serverInfo {

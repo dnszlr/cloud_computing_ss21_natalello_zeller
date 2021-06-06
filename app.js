@@ -57,7 +57,8 @@ app.use(function (req, res, next) {
         "script-src-attr 'none';" +
         "style-src 'self';" +
         "upgrade-insecure-requests;" +
-        "connect-src 'self'"
+        "connect-src 'self';" +
+        "form-action 'self'"
     );
     return next();
 });
