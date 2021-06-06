@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
     }
 });
 app.use(function (req, res, next) {
-    res.setHeader("Content-Security-Policy", "style-src 'self'; default-src 'none'");
+    res.setHeader("Content-Security-Policy", "style-src 'self'; default-src 'none'; form-action 'self'; base-uri 'self'; frame-ancestors 'self'");
     return next();
 });
 //---------------- SECURITY END ---------------
