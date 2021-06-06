@@ -26,28 +26,27 @@ app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 //---------------- SECURITY ---------------
-app.use(function(req, res, next) {
-   res.setHeader("Content-Security-Policy", "style-src 'self'; default-src 'none'");
-   return next();
-});
-
 app.use(helmet());
 // implement the X-XSS-Protection header
 // and force the header to be set to 1; mode = block
 app.use((_req, res, next) => {
-   res.setHeader("X-XSS-Protection", "1; mode=block");
-   next();
+    res.setHeader("X-XSS-Protection", "1; mode=block");
+    next();
 });
 
 app.enable('trust proxy');
-app.use(function(req,res, next) {
-   let host = req.headers.host;
-   console.log(req.headers);
-   if(!(host.includes('localhost') || req.protocol === 'https')) {
-      res.redirect('https://' + req.headers.host + req.url);
-   } else {
-      next()
-   }
+app.use(function (req, res, next) {
+    let host = req.headers.host;
+    console.log(req.headers);
+    if (!(host.includes('localhost') || req.protocol === 'https')) {
+        res.redirect('https://' + req.headers.host + req.url);
+    } else {
+        next()
+    }
+});
+app.use(function (req, res, next) {
+    res.setHeader("Content-Security-Policy", "style-src 'self'; default-src 'none'");
+    return next();
 });
 //---------------- SECURITY END ---------------
 
@@ -62,7 +61,7 @@ app.use('/registration', registrationRouter);
 app.use('/chat', chatRouter);
 app.use('/mobile', mobileRouter);
 app.use((req, res, next) => {
-   res.render('error');
+    res.render('error');
 });
 
 module.exports = app;
