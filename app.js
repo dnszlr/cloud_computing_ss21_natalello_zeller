@@ -26,6 +26,14 @@ app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, '/public')));
 //---------------- SECURITY ---------------
+app.use(function (req, res, next) {
+   res.setHeader(
+       'Content-Security-Policy',
+       "default-src 'none'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'unsafe-inline'; frame-src 'self'; form-action 'self'"
+   );
+   next();
+});
+
 app.use(helmet());
 // implement the X-XSS-Protection header
 // and force the header to be set to 1; mode = block
