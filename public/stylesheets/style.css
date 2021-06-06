@@ -548,3 +548,9 @@ a {
     outline: none;
     border-color: rgba(0, 102, 255, 0.2);
 }
+
+.btnProfilePicture {
+    background-image: url("/pictures/userIcon.png");
+}
+
+
