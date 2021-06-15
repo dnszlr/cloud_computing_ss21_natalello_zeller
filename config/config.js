@@ -19,7 +19,7 @@ const config = {
         host: 'redis-18403.c1.eu-west-1-3.ec2.cloud.redislabs.com',
         port: 18403,
         name: 'shaedAdmin',
-        password: '28aZNQvjg66wHCzmIoxYzEcvOczwc1Lf'
+        password: '!rEdIsUsErSoSe21!'
     }
 };
 
