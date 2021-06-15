@@ -31,5 +31,9 @@ console.log(`Application listening at http://localhost:${port}`);
 const socketIo = require('socket.io');
 const {initSocketIo} = require("../controllers/chatC");
 const io = socketIo(server);
+const redisAdapter = require('socket.io-redis');
+const config = require("../config/config");
+const redisData = config.redis;
+io.adapter(redisAdapter(`redis://${redisData.accessControl}:${redisData.password}@${redisData.host}:${redisData.port}`));
 initSocketIo(io);
 
