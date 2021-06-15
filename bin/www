@@ -33,10 +33,6 @@ const {initSocketIo} = require("../controllers/chatC");
 const io = socketIo(server);
 const redisAdapter = require('socket.io-redis');
 const redisData = config.redis;
-const host = 'redis-18403.c1.eu-west-1-3.ec2.cloud.redislabs.com';
-const port =  18403;
-const name=  'default';
-const password= '28aZNQvjg66wHCzmIoxYzEcvOczwc1Lf';
-io.adapter(redisAdapter(`redis://${name}:${password}@${host}:${port}`));
+io.adapter(redisAdapter(`redis://${redisData.name}:${redisData.password}@${redisData.host}:${redisData.port}`));
 initSocketIo(io);
 
