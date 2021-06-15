@@ -2,6 +2,7 @@ const moment = require('moment');
 const {addUser, removeUser, getUserById, getByUsername, getAllUsers} = require("../services/chatService");
 const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
+let instance = process.env.CF_INSTANCE_GUID || 'localhost';
 
 /**
  * Gets the chat.pug and renders it for client side
@@ -83,6 +84,7 @@ function initSocketIo(io) {
  */
 function formatHeader(username) {
     return {
+        instance,
         username,
         time: moment().format('HH:mm:ss')
     }
