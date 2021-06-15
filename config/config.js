@@ -18,7 +18,7 @@ const config = {
     redis: {
         host: 'redis-18403.c1.eu-west-1-3.ec2.cloud.redislabs.com',
         port: 18403,
-        accessControl: 'User',
+        name: 'shaedRedis',
         password: '28aZNQvjg66wHCzmIoxYzEcvOczwc1Lf'
     }
 };
