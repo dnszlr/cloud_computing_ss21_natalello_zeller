@@ -1,4 +1,4 @@
-const socket = io({transports: ['websocket']});
+const socket = io();
 // Elements on the left of the view
 let ulUser = document.getElementById('ulUser');
 let aUsername = document.getElementById('aUsername');
