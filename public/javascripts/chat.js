@@ -1,5 +1,5 @@
 const socket = io("https://shaed.eu-de.mybluemix.net/", {
-    transports: ["websocket", "polling"]
+    transports: ["websocket"]
 });
 // Elements on the left of the view
 let ulUser = document.getElementById('ulUser');
