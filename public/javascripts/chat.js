@@ -272,10 +272,8 @@ socket.on('init', function (username) {
  * @param backendUserList from server received user list.
  */
 function updateUser(user) {
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].id == user.id) {
-            users.push(user);
-        }
+    if(!users.some(usersEntry => usersEntry.id == user)) {
+        users.push(user);
     }
     users.forEach(user => {
         let userListElement = document.createElement('li');
