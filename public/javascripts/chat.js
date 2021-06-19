@@ -1,5 +1,5 @@
 const socket = io("https://shaed.eu-de.mybluemix.net/", {
-    transports: ["websocket"]
+    transports: ["websocket", "polling"]
 });
 // Elements on the left of the view
 let ulUser = document.getElementById('ulUser');
@@ -22,7 +22,7 @@ let windowStorage = [];
 // Username of logged in user;
 let clientUsername = getFromUri('username');
 // All logged in users
-let users = [...new Set()];
+let users = [];
 
 
 initView(mainName);
@@ -196,8 +196,8 @@ socket.on('profilePicture', function (data) {
     document.getElementById('btnProfilePicture').style.backgroundImage = data;
 });
 
-socket.on('syncUsers', function () {
-    socket.emit('clientSync', clientUsername);
+socket.on('syncUsers', function() {
+   socket.emit('clientSync', clientUsername);
 });
 
 /**
@@ -255,9 +255,8 @@ function appendMsg(data, window) {
  * Socket listens on server messages for new logged in users
  */
 socket.on('updateUserList', function (backendUserList) {
-    console.log("userlist arrived");
     backendUserList.forEach(user => {
-        console.log("user from list arrived: " + user.username);
+        console.log("userlist arrived: " + user.username);
     })
     ulUser.innerHTML = '';
     updateUser(backendUserList);
