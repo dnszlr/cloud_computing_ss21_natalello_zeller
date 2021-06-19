@@ -46,7 +46,7 @@ function getAllUsers() {
  */
 async function mergeUserSet(mergeSet) {
     if(mergeSet) {
-        users = new Set([...users, ...mergeSet]);
+        users = [...new Set([...users, ...mergeSet])];
     }
 }
 
