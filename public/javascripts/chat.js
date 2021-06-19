@@ -275,7 +275,7 @@ socket.on('init', function (username) {
  * @param backendUserList from server received user list.
  */
 function updateUser(backendUserList) {
-    users = backendUserList;
+    users.concat(backendUserList);
     backendUserList.forEach(user => {
         let userListElement = document.createElement('li');
         userListElement.textContent = user.username;
