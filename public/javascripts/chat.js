@@ -197,6 +197,7 @@ socket.on('profilePicture', function (data) {
 });
 
 socket.on('syncUsers', function() {
+    console.log("received sync request");
    socket.emit('clientSync', clientUsername);
 });
 
