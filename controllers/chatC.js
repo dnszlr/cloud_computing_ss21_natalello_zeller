@@ -31,7 +31,6 @@ function initSocketIo(io) {
             await userService.getByUsername(username, async function(err, user) {
                 storedUser=  user;
             });
-            console.log("img: " + storedUser.img);
             socket.emit('profilePicture', formatBackgroundImage(storedUser.img));
 
             io.emit('updateUserList', users);

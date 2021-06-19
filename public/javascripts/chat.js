@@ -251,6 +251,10 @@ function appendMsg(data, window) {
  * Socket listens on server messages for new logged in users
  */
 socket.on('updateUserList', function (backendUserList) {
+    console.log("userlist arrived");
+    backendUserList.forEach(user => {
+        console.log("user from list arrived: " + user.username);
+    })
     ulUser.innerHTML = '';
     updateUser(backendUserList);
 });
