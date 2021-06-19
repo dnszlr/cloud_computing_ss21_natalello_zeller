@@ -256,9 +256,9 @@ function appendMsg(data, window) {
  */
 socket.on('updateUserList', function (backendUserList) {
     console.log("userlist arrived");
-    backendUserList.forEach(user => {
-        console.log("user from list arrived: " + user.username);
-    })
+    for(let i = 0; i < users.length; i++) {
+        console.log("user from list arrived: " + users[i].username);
+    }
     ulUser.innerHTML = '';
     updateUser(backendUserList);
 });
@@ -276,11 +276,11 @@ socket.on('init', function (username) {
  */
 function updateUser(backendUserList) {
     users = backendUserList;
-    backendUserList.forEach(user => {
+    for(let i = 0; i < users.length; i++) {
         let userListElement = document.createElement('li');
-        userListElement.textContent = user.username;
+        userListElement.textContent = users[i].username;
         ulUser.appendChild(userListElement);
-    });
+    }
 }
 
 /**
