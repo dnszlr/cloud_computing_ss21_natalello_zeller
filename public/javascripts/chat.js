@@ -275,7 +275,6 @@ socket.on('init', function (username) {
  * @param backendUserList from server received user list.
  */
 function updateUser(backendUserList) {
-    users = users.concat(backendUserList)
     users = users.concat(backendUserList);
     users = [...new Set(users)];
     users.forEach(user => {
