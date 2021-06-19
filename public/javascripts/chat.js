@@ -273,7 +273,7 @@ socket.on('init', function (username) {
  */
 function updateUser(user) {
     for (let i = 0; i < users.length; i++) {
-        if (users[i].id === user.id) {
+        if (users[i].id == user.id) {
             users.push(user);
         }
     }
