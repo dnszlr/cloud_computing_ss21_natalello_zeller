@@ -1,4 +1,6 @@
-const socket = io();
+const socket = io("https://shaed.eu-de.mybluemix.net/", {
+    transports: ["websocket", "polling"]
+});
 // Elements on the left of the view
 let ulUser = document.getElementById('ulUser');
 let aUsername = document.getElementById('aUsername');
@@ -54,8 +56,8 @@ ulRoomNav.addEventListener('click', function (navbarElement) {
 function highlightSelection(roomName) {
     let liList = ulRoomNav.getElementsByTagName('li');
     console.log(liList);
-    for(let li in liList) {
-        console.log(liList[li].id +  ' | ' + roomName);
+    for (let li in liList) {
+        console.log(liList[li].id + ' | ' + roomName);
         liList[li].id === roomName ? liList[li].className = 'roomNavLiSelected' : liList[li].className = 'roomNavLi'
     }
 }
@@ -189,7 +191,7 @@ socket.on('group invite', function (groupName) {
     addRoom(groupName);
 });
 
-socket.on('profilePicture', function(data){
+socket.on('profilePicture', function (data) {
     console.log(data);
     document.getElementById('btnProfilePicture').style.backgroundImage = data;
 });
