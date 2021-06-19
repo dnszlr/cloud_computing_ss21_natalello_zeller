@@ -6,9 +6,8 @@ let users = [...new Set()];
  * @param username
  * @returns the new added user
  */
-function addUser(id, username) {
-    const user = {id, username};
-    if(getUserById(id) === undefined){
+function addUser(user) {
+    if(getUserById(user.id) === undefined){
         return users.push(user);
     }
 }

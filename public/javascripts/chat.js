@@ -255,12 +255,9 @@ function appendMsg(data, window) {
 /**
  * Socket listens on server messages for new logged in users
  */
-socket.on('updateUserList', function (backendUserList) {
-    backendUserList.forEach(user => {
-        console.log("userlist arrived: " + user.username);
-    })
+socket.on('updateUserList', function (user) {
     ulUser.innerHTML = '';
-    updateUser(backendUserList);
+    updateUser(user);
 });
 
 /**
@@ -274,12 +271,12 @@ socket.on('init', function (username) {
  * Updates the current logged in User List on the View
  * @param backendUserList from server received user list.
  */
-function updateUser(backendUserList) {
-    backendUserList.forEach(user => {
-        if (!users.includes(user)) {
+function updateUser(user) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].id === user.id) {
             users.push(user);
         }
-    });
+    }
     users.forEach(user => {
         let userListElement = document.createElement('li');
         userListElement.textContent = user.username;

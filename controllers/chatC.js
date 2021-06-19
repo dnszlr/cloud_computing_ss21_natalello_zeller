@@ -37,9 +37,10 @@ function initSocketIo(io) {
         });
 
         socket.on('clientSync', username => {
-            addUser(socket.id, username);
-            let users = getAllUsers();
-            io.emit('updateUserList', users);
+            let id = socket.id;
+            let user = {id, username};
+            addUser(user);
+            io.emit('updateUserList', user);
         });
 
         // CHAT MESSAGE
