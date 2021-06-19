@@ -8,7 +8,9 @@ let users = [...new Set()];
  */
 function addUser(id, username) {
     const user = {id, username};
-    return users.push(user);;
+    if(!users.includes(user)){
+        return users.push(user);
+    }
 }
 
 /**

@@ -196,6 +196,10 @@ socket.on('profilePicture', function (data) {
     document.getElementById('btnProfilePicture').style.backgroundImage = data;
 });
 
+socket.on('syncUsers', function () {
+    socket.emit('clientSync', clientUsername);
+});
+
 /**
  * Receives all messages from server
  */

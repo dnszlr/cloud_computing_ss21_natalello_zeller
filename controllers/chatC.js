@@ -21,20 +21,25 @@ getChat = function (req, res, next) {
 function initSocketIo(io) {
     io.on('connection', (socket) => {
         socket.on('tellUsername', async username => {
-            addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
             socket.emit('information', {header: formatHeader(bot), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
             socket.emit('init', username);
-            await userService.getByUsername(username, async function(err, user) {
-                if(user.img) {
+            await userService.getByUsername(username, async function (err, user) {
+                if (user.img) {
                     socket.emit('profilePicture', formatBackgroundImage(user.img));
                 }
             });
+            io.emit('syncUsers');
             // Problem here not every user synced in servers list!
-            io.emit('updateUserList', users);
             // On connect for other users
             socket.broadcast.emit('information', {header: formatHeader(bot), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
+        });
+
+        socket.on('clientSync', username => {
+            addUser(socket.id, username);
+            let users = getAllUsers();
+            io.emit('updateUserList', users);
         });
 
         // CHAT MESSAGE
@@ -67,7 +72,10 @@ function initSocketIo(io) {
 
         // DISCONNECT
         socket.on('disconnect', async () => {
-            io.emit('information', {header: formatHeader(bot), payload: {message: getUserById(socket.id).username + ' disconnected from Shaed!', fileType: 'text'}});
+            io.emit('information', {
+                header: formatHeader(bot),
+                payload: {message: getUserById(socket.id).username + ' disconnected from Shaed!', fileType: 'text'}
+            });
             await removeUser(socket.id);
             io.emit('updateUserList', getAllUsers());
         });
