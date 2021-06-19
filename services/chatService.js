@@ -46,10 +46,8 @@ function getAllUsers() {
  */
 async function mergeUserSet(mergeSet) {
     if(mergeSet) {
-        users = await users.concat(mergeSet);
-        console.log("Before merge length: " + users.length);
-        users = [...new Set(users)];
-        console.log("After merge length: " + users.length);
+        users = [...new Set(users.concat(mergeSet))];
+        console.log("merge length: " + users.length);
     }
 }
 
