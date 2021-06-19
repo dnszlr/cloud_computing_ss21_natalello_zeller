@@ -21,7 +21,6 @@ getChat = function (req, res, next) {
 function initSocketIo(io) {
     io.on('connection', (socket) => {
         socket.on('tellUsername', async username => {
-            let users = getAllUsers();
             // On connect for new user
             socket.emit('information', {header: formatHeader(bot), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
             socket.emit('init', username);

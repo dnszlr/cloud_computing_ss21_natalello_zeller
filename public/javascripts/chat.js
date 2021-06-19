@@ -196,9 +196,9 @@ socket.on('profilePicture', function (data) {
     document.getElementById('btnProfilePicture').style.backgroundImage = data;
 });
 
-socket.on('syncUsers', function() {
+socket.on('syncUsers', function () {
     console.log("received sync request");
-   socket.emit('clientSync', clientUsername);
+    socket.emit('clientSync', clientUsername);
 });
 
 /**
@@ -275,11 +275,8 @@ socket.on('init', function (username) {
  * @param backendUserList from server received user list.
  */
 function updateUser(backendUserList) {
-    backendUserList.forEach(user => {
-       if(!users.includes(user)) {
-           users.push(user);
-       }
-    });
+    users = users.concat(backendUserList);
+    users = [...new Set(users.map(user => user.id))];
     users.forEach(user => {
         let userListElement = document.createElement('li');
         userListElement.textContent = user.username;
