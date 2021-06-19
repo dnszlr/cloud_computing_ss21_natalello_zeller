@@ -196,9 +196,9 @@ socket.on('profilePicture', function (data) {
     document.getElementById('btnProfilePicture').style.backgroundImage = data;
 });
 
-socket.on('syncUsers', function () {
+socket.on('syncUsers', function() {
     console.log("received sync request");
-    socket.emit('clientSync', clientUsername);
+   socket.emit('clientSync', clientUsername);
 });
 
 /**
@@ -255,9 +255,12 @@ function appendMsg(data, window) {
 /**
  * Socket listens on server messages for new logged in users
  */
-socket.on('updateUserList', function (user) {
+socket.on('updateUserList', function (backendUserList) {
+    backendUserList.forEach(user => {
+        console.log("userlist arrived: " + user.username);
+    })
     ulUser.innerHTML = '';
-    updateUser(user);
+    updateUser(backendUserList);
 });
 
 /**
@@ -271,10 +274,12 @@ socket.on('init', function (username) {
  * Updates the current logged in User List on the View
  * @param backendUserList from server received user list.
  */
-function updateUser(user) {
-    if(!users.some(usersEntry => usersEntry.id == user)) {
-        users.push(user);
-    }
+function updateUser(backendUserList) {
+    backendUserList.forEach(user => {
+       if(!users.includes(user)) {
+           users.push(user);
+       }
+    });
     users.forEach(user => {
         let userListElement = document.createElement('li');
         userListElement.textContent = user.username;
