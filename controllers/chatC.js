@@ -24,24 +24,17 @@ function initSocketIo(io) {
             addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
-            socket.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
+            socket.emit('information', {header: formatHeader(bot), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
             socket.emit('init', username);
-            // Sends logged in user list to everyone in chatroom
-            let storedUser = undefined;
             await userService.getByUsername(username, async function(err, user) {
-                storedUser = user;
+                if(user.img) {
+                    socket.emit('profilePicture', formatBackgroundImage(user.img));
+                }
             });
-            socket.emit('profilePicture', formatBackgroundImage(storedUser.img));
-            io.emit('syncUsers');
+            // Problem here not every user synced in servers list!
+            io.emit('updateUserList', users);
             // On connect for other users
-            socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
-        });
-
-        socket.on('clientSync', async users => {
-           await mergeUserSet(users);
-           let serverUsers = getAllUsers();
-           console.log("Server Users length: " + serverUsers.length);
-           io.emit('updateUserList', serverUsers);
+            socket.broadcast.emit('information', {header: formatHeader(bot), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
         });
 
         // CHAT MESSAGE

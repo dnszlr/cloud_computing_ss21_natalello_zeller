@@ -22,7 +22,7 @@ let windowStorage = [];
 // Username of logged in user;
 let clientUsername = getFromUri('username');
 // All logged in users
-let users = [];
+let users = [...new Set()];
 
 
 initView(mainName);
@@ -196,10 +196,6 @@ socket.on('profilePicture', function (data) {
     document.getElementById('btnProfilePicture').style.backgroundImage = data;
 });
 
-socket.on('syncUsers', function() {
-   socket.emit('clientSync', users);
-});
-
 /**
  * Receives all messages from server
  */
@@ -256,9 +252,9 @@ function appendMsg(data, window) {
  */
 socket.on('updateUserList', function (backendUserList) {
     console.log("userlist arrived");
-    for(let i = 0; i < users.length; i++) {
-        console.log("user from list arrived: " + users[i].username);
-    }
+    backendUserList.forEach(user => {
+        console.log("user from list arrived: " + user.username);
+    })
     ulUser.innerHTML = '';
     updateUser(backendUserList);
 });
@@ -276,11 +272,11 @@ socket.on('init', function (username) {
  */
 function updateUser(backendUserList) {
     users = backendUserList;
-    for(let i = 0; i < users.length; i++) {
+    backendUserList.forEach(user => {
         let userListElement = document.createElement('li');
-        userListElement.textContent = users[i].username;
+        userListElement.textContent = user.username;
         ulUser.appendChild(userListElement);
-    }
+    });
 }
 
 /**
