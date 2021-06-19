@@ -44,7 +44,7 @@ function getAllUsers() {
  * Merges incoming user sets from other sets with own set.
  * @param serverUserSets
  */
-function mergeUserSet(mergeSet) {
+async function mergeUserSet(mergeSet) {
     if(mergeSet) {
         users = new Set([users, mergeSet])
     }
