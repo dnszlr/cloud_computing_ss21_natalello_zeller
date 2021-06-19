@@ -276,7 +276,12 @@ socket.on('init', function (username) {
  */
 function updateUser(backendUserList) {
     users = users.concat(backendUserList);
-    users = [...new Set(users.map(user => user.id))];
+    users = Array.from(new Set(users.map(user => user.id))).map(id => {
+        return {
+            id: id,
+            username: users.find(user => user.id === id).username
+        };
+    });
     users.forEach(user => {
         let userListElement = document.createElement('li');
         userListElement.textContent = user.username;
