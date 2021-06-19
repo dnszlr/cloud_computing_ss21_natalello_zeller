@@ -24,7 +24,7 @@ function initSocketIo(io) {
             addUser(socket.id, username);
             let users = getAllUsers();
             // On connect for new user
-            socket.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ', welcome to Shaed!',                  fileType: 'text'}});
+            socket.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
             socket.emit('init', username);
             // Sends logged in user list to everyone in chatroom
             let storedUser = undefined;
@@ -35,7 +35,7 @@ function initSocketIo(io) {
 
             io.emit('updateUserList', users);
             // On connect for other users
-            socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to               Shaed!', fileType: 'text'}});
+            socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
         });
         // CHAT MESSAGE
         socket.on('chat message', data => {
@@ -68,7 +68,7 @@ function initSocketIo(io) {
 
         // DISCONNECT
         socket.on('disconnect', async () => {
-            io.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: ' disconnected from Shaed!', fileType: 'text'}});
+            io.emit('information', {header: formatHeader(bot), payload: {message: getUserById(socket.id).username + ' disconnected from Shaed!', fileType: 'text'}});
             await removeUser(socket.id);
             io.emit('updateUserList', getAllUsers());
         });
