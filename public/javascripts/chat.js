@@ -22,7 +22,7 @@ let windowStorage = [];
 // Username of logged in user;
 let clientUsername = getFromUri('username');
 // All logged in users
-let users = [...new Set()];
+let users = [];
 
 
 initView(mainName);
@@ -271,8 +271,7 @@ socket.on('init', function (username) {
  * @param backendUserList from server received user list.
  */
 function updateUser(backendUserList) {
-    users = new Set([users, backendUserList]);
-    socket.emit('syncUsers', users);
+    users = backendUserList;
     backendUserList.forEach(user => {
         let userListElement = document.createElement('li');
         userListElement.textContent = user.username;
