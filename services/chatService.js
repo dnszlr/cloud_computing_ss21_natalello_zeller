@@ -46,7 +46,7 @@ function getAllUsers() {
  */
 async function mergeUserSet(mergeSet) {
     if(mergeSet) {
-        users = users.concat(mergeSet);
+        users = await users.concat(mergeSet);
         users = [...new Set(users)];
     }
 }
