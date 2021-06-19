@@ -40,6 +40,7 @@ function initSocketIo(io) {
         socket.on('clientSync', async users => {
            await mergeUserSet(users);
            let serverUsers = getAllUsers();
+           console.log("Server Users lenght: " + serverUsers.length);
            io.emit('updateUserList', serverUsers);
         });
 
