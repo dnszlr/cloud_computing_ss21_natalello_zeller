@@ -16,10 +16,10 @@ const config = {
         lifetime: 1800000
     },
     redis: {
-        host: "redis-10002.c2.eu-west-1-3.ec2.cloud.redislabs.com",
-        rPort: 10002,
+        host: 'redis-18403.c1.eu-west-1-3.ec2.cloud.redislabs.com',
+        rPort: 18403,
         name: 'default',
-        password: "0EPzzFetOEBL3sfUyoYjiZb9QT1fesNG"
+        password: '28aZNQvjg66wHCzmIoxYzEcvOczwc1Lf'
     }
 };
 
