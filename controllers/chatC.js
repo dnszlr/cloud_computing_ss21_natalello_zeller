@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {addUser, removeUser, getUserById, getByUsername, getAllUsers} = require("../services/chatService");
+const {addUser, removeUser, getUserById, getByUsername, getAllUsers, mergeUserSet} = require("../services/chatService");
 const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
 let instance = process.env.CF_INSTANCE_INDEX || 'localhost';
@@ -32,10 +32,15 @@ function initSocketIo(io) {
                 storedUser = user;
             });
             socket.emit('profilePicture', formatBackgroundImage(storedUser.img));
-
-            io.emit('updateUserList', users);
+            io.emit('syncUsers');
             // On connect for other users
             socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
+        });
+
+        socket.on('clientSync', async users => {
+           await mergeUserSet(users);
+           let serverUsers = getAllUsers();
+           io.emit('updateUserList', serverUsers);
         });
 
         // CHAT MESSAGE
