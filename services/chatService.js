@@ -55,5 +55,6 @@ module.exports = {
     removeUser,
     getUserById,
     getByUsername,
-    getAllUsers
+    getAllUsers,
+    mergeUserSet
 }

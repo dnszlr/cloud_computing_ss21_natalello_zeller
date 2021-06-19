@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {addUser, removeUser, getUserById, getByUsername, getAllUsers} = require("../services/chatService");
+const {addUser, removeUser, getUserById, getByUsername, getAllUsers, mergeUserSet} = require("../services/chatService");
 const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
 let instance = process.env.CF_INSTANCE_INDEX || 'localhost';
@@ -29,7 +29,7 @@ function initSocketIo(io) {
             // Sends logged in user list to everyone in chatroom
             let storedUser = undefined;
             await userService.getByUsername(username, async function(err, user) {
-                storedUser=  user;
+                storedUser = user;
             });
             socket.emit('profilePicture', formatBackgroundImage(storedUser.img));
 
@@ -37,6 +37,11 @@ function initSocketIo(io) {
             // On connect for other users
             socket.broadcast.emit('information', {header: formatHeader(bot, getUserById(socket.id).username), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
         });
+
+        socket.on('syncUsers', userSet => {
+            mergeUserSet(userSet);
+        });
+
         // CHAT MESSAGE
         socket.on('chat message', data => {
             io.emit('chat message', {header: formatHeader(getUserById(socket.id).username), payload: data});
@@ -54,14 +59,13 @@ function initSocketIo(io) {
             console.log(data);
             io.to(data.groupName).emit('group message', {header: formatHeader(getUserById(socket.id).username), payload: data});
         });
-
         // JOIN GROUP
         socket.on('createGroup', data => {
             for (let i = 0; i < data.groupUser.length; i++) {
                 io.to(data.groupUser[i].id).emit('group invite', data.groupName);
             }
         });
-
+        // GROUP INVITE
         socket.on('group invite', groupName => {
             socket.join(groupName);
         });
