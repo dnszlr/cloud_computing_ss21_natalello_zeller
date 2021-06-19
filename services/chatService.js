@@ -46,9 +46,13 @@ function getAllUsers() {
  */
 async function mergeUserSet(mergeSet) {
     if(mergeSet) {
-        users = [...new Set(users.concat(mergeSet))];
-        console.log("merge length: " + users.length);
+        mergeSet.forEach(user => {
+            if(!users.includes(user)) {
+                users.add(user);
+            }
+        });
     }
+
 }
 
 module.exports = {

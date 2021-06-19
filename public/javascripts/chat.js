@@ -22,7 +22,7 @@ let windowStorage = [];
 // Username of logged in user;
 let clientUsername = getFromUri('username');
 // All logged in users
-let users = [...new Set()];
+let users = [];
 
 
 initView(mainName);
