@@ -2,7 +2,7 @@ const moment = require('moment');
 const {addUser, removeUser, getUserById, getByUsername, getAllUsers} = require("../services/chatService");
 const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
-let instance = process.env.CF_INSTANCE_GUID || 'localhost';
+let instance = process.env.CF_INSTANCE_INDEX || 'localhost';
 
 /**
  * Gets the chat.pug and renders it for client side
