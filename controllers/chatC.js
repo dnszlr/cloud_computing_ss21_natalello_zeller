@@ -1,5 +1,5 @@
 const moment = require('moment');
-const {addUser, removeUser, getUserById, getByUsername, getAllUsers, mergeUserSet} = require("../services/chatService");
+const {addUser, removeUser, getUserById, getByUsername, getAllUsers, resetList} = require("../services/chatService");
 const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
 let instance = process.env.CF_INSTANCE_INDEX || 'localhost';
@@ -29,6 +29,7 @@ function initSocketIo(io) {
                     socket.emit('profilePicture', formatBackgroundImage(user.img));
                 }
             });
+            resetList();
             io.emit('syncUsers');
             // Problem here not every user synced in servers list!
             socket.broadcast.emit('information', {header: formatHeader(bot), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
@@ -36,8 +37,8 @@ function initSocketIo(io) {
 
         socket.on('clientSync', username => {
             addUser(socket.id, username);
-            let users = getAllUsers();
-            io.emit('updateUserList', users);
+            let user = getUserById(socket.id);
+            io.emit('updateUserList', user);
         });
 
         // CHAT MESSAGE

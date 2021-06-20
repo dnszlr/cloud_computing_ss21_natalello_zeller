@@ -8,7 +8,7 @@ let users = [...new Set()];
  */
 function addUser(id, username) {
     const user = {id, username};
-    if(!users.includes(user)){
+    if (!users.includes(user)) {
         return users.push(user);
     }
 }
@@ -43,18 +43,11 @@ function getAllUsers() {
 }
 
 /**
- * Merges incoming user sets from other sets with own set.
+ * Resets the the list holding the currently logged in users.
  * @param serverUserSets
  */
-async function mergeUserSet(mergeSet) {
-    if(mergeSet) {
-        mergeSet.forEach(user => {
-            if(!users.includes(user)) {
-                users.add(user);
-            }
-        });
-    }
-
+function resetList() {
+    users = [...new Set()];
 }
 
 module.exports = {
@@ -63,5 +56,5 @@ module.exports = {
     getUserById,
     getByUsername,
     getAllUsers,
-    mergeUserSet
+    resetList
 }

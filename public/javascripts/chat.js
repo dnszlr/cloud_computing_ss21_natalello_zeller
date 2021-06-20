@@ -198,6 +198,8 @@ socket.on('profilePicture', function (data) {
 
 socket.on('syncUsers', function () {
     console.log("received sync request");
+    // Reset user list for fill up with new synced users
+    users = [];
     socket.emit('clientSync', clientUsername);
 });
 
@@ -255,12 +257,10 @@ function appendMsg(data, window) {
 /**
  * Socket listens on server messages for new logged in users
  */
-socket.on('updateUserList', function (backendUserList) {
-    backendUserList.forEach(user => {
-        console.log("userlist arrived: " + user.username);
-    })
+socket.on('updateUserList', function (user) {
+    console.log("user arrived: " + user.username);
     ulUser.innerHTML = '';
-    updateUser(backendUserList);
+    updateUser(user);
 });
 
 /**
@@ -272,21 +272,13 @@ socket.on('init', function (username) {
 
 /**
  * Updates the current logged in User List on the View
- * @param backendUserList from server received user list.
+ * @param backendUserList from server received user
  */
-function updateUser(backendUserList) {
-    users = users.concat(backendUserList);
-    users = Array.from(new Set(users.map(user => user.id))).map(id => {
-        return {
-            id: id,
-            username: users.find(user => user.id === id).username
-        };
-    });
-    users.forEach(user => {
-        let userListElement = document.createElement('li');
-        userListElement.textContent = user.username;
-        ulUser.appendChild(userListElement);
-    });
+function updateUser(user) {
+    users.add(user);
+    let userListElement = document.createElement('li');
+    userListElement.textContent = user.username;
+    ulUser.appendChild(userListElement);
 }
 
 /**
