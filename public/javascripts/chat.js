@@ -276,8 +276,24 @@ socket.on('init', function (username) {
  */
 function updateUser(user) {
     users.push(user);
+    manipulateUserList(user.username);
+}
+
+socket.on('removeUser', async function (user) {
+    const userToDeleteIndex = await users.findIndex(userIndex=> userIndex.id == user.id);
+    users.splice(userToDeleteIndex, 1);
+    removeUpdate()
+});
+
+function removeUpdate() {
+    users.forEach(user => {
+        manipulateUserList(user.username);
+    });
+}
+
+function manipulateUserList(username) {
     let userListElement = document.createElement('li');
-    userListElement.textContent = user.username;
+    userListElement.textContent = username;
     ulUser.appendChild(userListElement);
 }
 

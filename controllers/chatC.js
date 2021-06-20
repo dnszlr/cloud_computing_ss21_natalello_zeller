@@ -73,7 +73,9 @@ function initSocketIo(io) {
         socket.on('disconnect', async () => {
             io.emit('information', {header: formatHeader(bot), payload: {message: getUserById(socket.id).username + ' disconnected from Shaed!', fileType: 'text'}});
             await removeUser(socket.id);
-            io.emit('updateUserList', getAllUsers());
+            let user = getUserById(socket.id);
+            // TODO change so it only removes 1 user from client
+            io.emit('removeUser', user);
         });
     });
 }
