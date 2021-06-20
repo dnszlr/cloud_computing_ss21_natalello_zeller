@@ -200,6 +200,7 @@ socket.on('syncUsers', function () {
     console.log("received sync request");
     // Reset user list for fill up with new synced users
     users = [];
+    ulUser.innerHTML = '';
     socket.emit('clientSync', clientUsername);
 });
 
@@ -259,7 +260,6 @@ function appendMsg(data, window) {
  */
 socket.on('updateUserList', function (user) {
     console.log("user arrived: " + user.username);
-    ulUser.innerHTML = '';
     updateUser(user);
 });
 
