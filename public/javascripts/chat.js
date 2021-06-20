@@ -281,7 +281,10 @@ function updateUser(user) {
 
 socket.on('removeUser', async function (user) {
     const userToDeleteIndex = await users.findIndex(userIndex=> userIndex.id == user.id);
+    console.log("Found user index to delete: " + userToDeleteIndex);
+    console.log("Users length before delete:" + users.length);
     users.splice(userToDeleteIndex, 1);
+    console.log("Users length after delete:" + users.length);
     removeUpdate()
 });
 
