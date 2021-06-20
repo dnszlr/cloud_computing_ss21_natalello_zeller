@@ -286,6 +286,7 @@ socket.on('removeUser', async function (user) {
 });
 
 function removeUpdate() {
+    ulUser.innerHTML = '';
     users.forEach(user => {
         manipulateUserList(user.username);
     });
