@@ -275,7 +275,7 @@ socket.on('init', function (username) {
  * @param backendUserList from server received user
  */
 function updateUser(user) {
-    users.add(user);
+    users.push(user);
     let userListElement = document.createElement('li');
     userListElement.textContent = user.username;
     ulUser.appendChild(userListElement);
