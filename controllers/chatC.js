@@ -29,7 +29,7 @@ function initSocketIo(io) {
                     socket.emit('profilePicture', formatBackgroundImage(user.img));
                 }
             });
-            resetList();
+            //resetList();
             io.emit('syncUsers');
             // Problem here not every user synced in servers list!
             socket.broadcast.emit('information', {header: formatHeader(bot), payload: {message: username + ' conntected to Shaed!', fileType: 'text'}});
