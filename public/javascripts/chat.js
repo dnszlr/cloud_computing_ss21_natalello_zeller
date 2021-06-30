@@ -218,7 +218,7 @@ socket.on('information', function (data) {
 function appendMsg(data, window) {
     let item = document.createElement('li');
     console.log(data);
-    let header = 'Instance: ' + data.header.instance + ' ' + data.header.username + ' ' + data.header.time + '<br>';
+    let header = data.header.username + ' ' + data.header.time + '<br>';
     if (data.payload.fileType === 'text') {
         item.innerHTML = header + data.payload.message;
     } else {
@@ -267,7 +267,7 @@ socket.on('updateUserList', function (user) {
  * Sets the username and later in the project gets the profile picture from the server
  */
 socket.on('init', function (data) {
-    aUsername.innerText = 'Username: ' + data.username + ' | Instance: ' + data.instance;
+    aUsername.innerText = 'Username: ' + data.username + '<br>' + 'Instance: ' + data.instance;
 });
 
 /**
