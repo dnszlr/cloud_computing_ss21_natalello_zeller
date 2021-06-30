@@ -2,7 +2,7 @@ const moment = require('moment');
 const {addUser, removeUser, getUserById, getByUsername, getAllUsers, resetList} = require("../services/chatService");
 const userService = require('../services/userService')
 const bot = 'Shaed-Bot';
-let instance = process.env.CF_INSTANCE_INDEX || 'localhost';
+let instance = process.env.CF_INSTANCE_GUID || 'localhost';
 
 /**
  * Gets the chat.pug and renders it for client side
@@ -23,7 +23,7 @@ function initSocketIo(io) {
         socket.on('tellUsername', async username => {
             // On connect for new user
             socket.emit('information', {header: formatHeader(bot), payload: {message: username + ', welcome to Shaed!', fileType: 'text'}});
-            socket.emit('init', username);
+            socket.emit('init', {username: username, instance: instance});
             await userService.getByUsername(username, async function(err, user) {
                 if(user.img) {
                     socket.emit('profilePicture', formatBackgroundImage(user.img));
@@ -88,7 +88,6 @@ function initSocketIo(io) {
  */
 function formatHeader(username) {
     return {
-        instance,
         username,
         time: moment().format('HH:mm:ss')
     }
