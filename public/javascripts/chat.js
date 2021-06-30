@@ -267,7 +267,7 @@ socket.on('updateUserList', function (user) {
  * Sets the username and later in the project gets the profile picture from the server
  */
 socket.on('init', function (data) {
-    aUsername.innerText = 'Username: ' + data.username + '<br>' + 'Instance: ' + data.instance;
+    aUsername.innerText = 'Username: ' + data.username + ' | ' + 'Instance: ' + data.instance;
 });
 
 /**
